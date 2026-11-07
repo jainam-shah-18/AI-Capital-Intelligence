@@ -129,4 +129,4 @@ This is the Day 1 starter scaffold. Cloud services are not connected until you c
 =======
 # AI-Capital-Intelligence
 End-to-end AI-powered financial intelligence platform using SEC data, Python, Snowflake, dbt, AWS, Airflow, Docker and CI/CD.
->>>>>>> origin/main
+
