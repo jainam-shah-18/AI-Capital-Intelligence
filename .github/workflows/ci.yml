@@ -39,7 +39,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run automated tests
-        run: pytest -v
+        run: python -m pytest -v
 
       - name: Build Docker image
         run: docker build -f Dockerfile -t ai-capital-intelligence:ci .
