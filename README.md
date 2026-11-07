@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AI Capital Intelligence
 
 An industry-style financial data platform prototype that ingests public SEC company facts, normalizes selected financial metrics, stores raw and curated data, and optionally publishes to AWS S3 and Snowflake.
