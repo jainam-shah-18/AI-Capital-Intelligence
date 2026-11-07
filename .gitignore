@@ -1,48 +1,54 @@
-.env
-.venv/
+﻿# Python
 __pycache__/
-.pytest_cache/
 *.py[cod]
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-.DS_Store
-.idea/
-.vscode/
-
+*$py.class
+.venv/
 .venv_dbt/
-
-
-# Airflow local credentials
-.env.airflow
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
 
 # Environment files and secrets
+.env
 .env.*
 !.env.example
 **/.env
 **/.env.*
+**/profiles.yml
 
 # Credentials and private keys
-**/profiles.yml
 *.pem
 *.key
+.pypirc
 
-# Generated tooling artifacts
-**/logs/
-**/target/
-**/dbt_packages/
-backup*/
-
-# Airflow runtime files
-orchestration/airflow/logs/
-
-# Generated validation outputs
+# Project data
+data/raw/*
+data/processed/*
 data/validation/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
 
-# dbt seed backups
+# dbt generated files and credentials
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/profiles.yml
 *.bak
 *.backup*
 
-# Review archives and temporary copies
+# Airflow runtime files and credentials
+orchestration/airflow/.env.airflow
+orchestration/airflow/logs/
+**/logs/
+
+# Temporary review files
+backup*/
 v4_code_review.zip
+
+# IDE and operating system
+.DS_Store
+.idea/
+.vscode/

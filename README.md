@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AI Capital Intelligence
 
 An industry-style financial data platform prototype that ingests public SEC company facts, normalizes selected financial metrics, stores raw and curated data, and optionally publishes to AWS S3 and Snowflake.
@@ -126,3 +127,7 @@ The pipeline loads curated rows into `FINANCIAL_METRICS` when Snowflake settings
 ## Repository status
 
 This is the Day 1 starter scaffold. Cloud services are not connected until you configure credentials and run the relevant setup steps.
+=======
+# AI-Capital-Intelligence
+End-to-end AI-powered financial intelligence platform using SEC data, Python, Snowflake, dbt, AWS, Airflow, Docker and CI/CD.
+>>>>>>> origin/main
