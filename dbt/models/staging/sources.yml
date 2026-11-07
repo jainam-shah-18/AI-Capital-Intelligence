@@ -1,0 +1,10 @@
+﻿version: 2
+
+sources:
+  - name: aci_analytics
+    database: ACI_DB
+    schema: ANALYTICS
+    description: "Verified upstream SEC financial observations."
+    tables:
+      - name: int_financial_observations
+        description: "Canonical financial observations with SEC filing provenance and period classifications."

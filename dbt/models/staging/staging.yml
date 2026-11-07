@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_sec_financial_observations
+    description: "Staging layer for SEC financial observations, preserving original filing provenance."
+    columns:
+      - name: company_cik
+        description: "SEC Central Index Key."
+        data_tests:
+          - not_null
+
+      - name: company_name
+        data_tests:
+          - not_null
+
+      - name: concept_name
+        data_tests:
+          - not_null
+
+      - name: reported_value
+        data_tests:
+          - not_null
+
+      - name: accession_number
+        description: "SEC filing accession number."
+        data_tests:
+          - not_null

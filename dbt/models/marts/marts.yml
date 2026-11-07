@@ -1,0 +1,86 @@
+
+version: 2
+
+models:
+  - name: mart_company_performance
+    description: "Quarterly financial performance mart with revenue, profitability, and cash-flow metrics."
+
+    columns:
+      - name: company_cik
+        data_tests:
+          - not_null
+
+      - name: company_name
+        data_tests:
+          - not_null
+
+      - name: period_end
+        data_tests:
+          - not_null
+
+      - name: revenue
+        data_tests:
+          - not_null
+
+  - name: mart_company_comparison
+    description: "Peer comparison mart for four companies across aligned calendar reporting periods."
+
+    columns:
+      - name: company_cik
+        data_tests:
+          - not_null
+
+      - name: company_name
+        data_tests:
+          - not_null
+
+      - name: period_start
+        data_tests:
+          - not_null
+
+      - name: period_end
+        data_tests:
+          - not_null
+
+      - name: revenue
+        data_tests:
+          - not_null
+
+      - name: revenue_rank
+        data_tests:
+          - not_null
+
+      - name: comparison_company_count
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [4]
+
+  - name: mart_financial_metrics_canonical
+    description: "Canonical financial facts selected with filing provenance and financial metric validation."
+
+    columns:
+      - name: company_cik
+        data_tests:
+          - not_null
+
+      - name: metric_name
+        data_tests:
+          - not_null
+
+      - name: period_start
+        data_tests:
+          - not_null
+
+      - name: period_end
+        data_tests:
+          - not_null
+
+      - name: financial_value
+        data_tests:
+          - not_null
+
+      - name: accession_number
+        data_tests:
+          - not_null

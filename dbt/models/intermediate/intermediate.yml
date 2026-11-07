@@ -1,0 +1,63 @@
+
+version: 2
+
+models:
+  - name: int_financial_observations_classified
+    description: "Intermediate classification of SEC financial observations by fact type, duration quality, and filing evidence."
+
+    columns:
+      - name: company_cik
+        data_tests:
+          - not_null
+
+      - name: reported_value
+        data_tests:
+          - not_null
+
+      - name: fact_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - INSTANT_FACT
+                  - DURATION_FACT
+
+      - name: duration_quality
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - NOT_APPLICABLE_INSTANT
+                  - STANDARD_DURATION
+                  - UNUSUAL_DURATION
+                  - UNCLASSIFIED_DURATION
+
+      - name: filing_evidence_class
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - PRIMARY
+                  - ALTERNATE
+                  - AMENDED
+                  - NON_CANONICAL
+                  - OTHER
+
+  - name: int_financial_performance_metrics
+    description: "Quarterly company-level financial performance metrics, margins, cash flow, and revenue growth."
+
+    columns:
+      - name: company_cik
+        data_tests:
+          - not_null
+
+      - name: period_end
+        data_tests:
+          - not_null
+
+      - name: revenue
+        data_tests:
+          - not_null

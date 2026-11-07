@@ -1,0 +1,40 @@
+﻿# Secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Python environments
+.venv/
+.venv*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Backups and archives
+backup*/
+*.zip
+
+# Local data and generated artifacts
+data/
+warehouse/
+*.log
+
+# dbt generated files and project
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Git and editor files
+.git/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
