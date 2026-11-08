@@ -1,55 +1,43 @@
-
 version: 2
 
 models:
   - name: mart_company_performance
     description: "Quarterly financial performance mart with revenue, profitability, and cash-flow metrics."
-
     columns:
       - name: company_cik
         data_tests:
           - not_null
-
       - name: company_name
         data_tests:
           - not_null
-
       - name: period_end
         data_tests:
           - not_null
-
       - name: revenue
         data_tests:
           - not_null
 
   - name: mart_company_comparison
     description: "Peer comparison mart for four companies across aligned calendar reporting periods."
-
     columns:
       - name: company_cik
         data_tests:
           - not_null
-
       - name: company_name
         data_tests:
           - not_null
-
       - name: period_start
         data_tests:
           - not_null
-
       - name: period_end
         data_tests:
           - not_null
-
       - name: revenue
         data_tests:
           - not_null
-
       - name: revenue_rank
         data_tests:
           - not_null
-
       - name: comparison_company_count
         data_tests:
           - not_null
@@ -59,28 +47,194 @@ models:
 
   - name: mart_financial_metrics_canonical
     description: "Canonical financial facts selected with filing provenance and financial metric validation."
-
     columns:
       - name: company_cik
         data_tests:
           - not_null
-
       - name: metric_name
         data_tests:
           - not_null
-
       - name: period_start
         data_tests:
           - not_null
-
       - name: period_end
         data_tests:
           - not_null
-
       - name: financial_value
         data_tests:
           - not_null
-
       - name: accession_number
         data_tests:
           - not_null
+
+  - name: mart_revenue_forecast
+    description: "Revenue forecasting mart containing historical backtests and next-quarter revenue projections."
+    columns:
+      - name: company_cik
+        data_tests:
+          - not_null
+      - name: company_name
+        data_tests:
+          - not_null
+      - name: forecast_record_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['BACKTEST', 'NEXT_QUARTER_FORECAST']
+      - name: target_fiscal_year
+        data_tests:
+          - not_null
+      - name: target_fiscal_quarter
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Q1', 'Q2', 'Q3', 'Q4']
+      - name: target_period_end
+        data_tests:
+          - not_null
+      - name: model_created_at
+        data_tests:
+          - not_null
+
+  - name: mart_cash_flow_analysis
+    description: "Quarterly operating cash flow and capital expenditure analysis with conservative free cash flow calculation gated by CAPEX reporting-basis approval."
+    columns:
+      - name: company_cik
+        description: "SEC Central Index Key identifying the reporting company."
+        data_tests:
+          - not_null
+      - name: company_name
+        data_tests:
+          - not_null
+      - name: period_start
+        data_tests:
+          - not_null
+      - name: period_end
+        data_tests:
+          - not_null
+      - name: operating_cash_flow
+        description: "Reported quarterly cash flow from operating activities."
+      - name: capex_reported_value
+        description: "Reported quarterly capital expenditure value; source concept is retained."
+      - name: capex_concept_count
+        description: "Number of distinct CAPEX concepts found for the company-quarter."
+      - name: capex_reporting_basis
+        description: "Reporting basis used to assess CAPEX comparability."
+      - name: free_cash_flow
+        description: "Operating cash flow less CAPEX, calculated only when the CAPEX reporting basis is approved."
+      - name: free_cash_flow_status
+        description: "Explains whether free cash flow was calculated or why it remains unavailable."
+      - name: capex_quality_status
+        description: "CAPEX availability, concept ambiguity, and reporting-basis quality classification."
+      - name: ocf_accession_number
+        description: "SEC filing accession number supporting operating cash flow."
+      - name: capex_accession_number
+        description: "SEC filing accession number supporting capital expenditure."
+
+  - name: mart_financial_anomalies
+    description: "Quarterly year-over-year financial growth anomaly monitoring for revenue, operating income, and net income using historical rolling baselines and standard-deviation thresholds."
+    columns:
+      - name: company_cik
+        data_tests:
+          - not_null
+      - name: company_name
+        data_tests:
+          - not_null
+      - name: metric_name
+        description: "Financial metric evaluated for unusual year-over-year movement."
+        data_tests:
+          - not_null
+      - name: concept_name
+        description: "Underlying SEC XBRL concept retained to prevent cross-concept comparisons."
+      - name: period_end
+        data_tests:
+          - not_null
+      - name: current_value
+        description: "Current-quarter reported financial value."
+      - name: prior_year_value
+        description: "Comparable prior-year quarter value."
+      - name: comparison_quality_status
+        description: "Identifies zero, negative, sign-changing, and comparable prior-year baselines."
+      - name: yoy_growth_pct
+        description: "Year-over-year percentage growth, calculated only for comparable positive prior-year baselines."
+      - name: historical_observation_count
+        description: "Number of valid historical growth observations in the rolling baseline."
+      - name: historical_avg_yoy_growth_pct
+        description: "Average historical year-over-year growth across the preceding observation window."
+      - name: historical_stddev_yoy_growth_pct
+        description: "Sample standard deviation of historical year-over-year growth."
+      - name: anomaly_z_score
+        description: "Standardized deviation of current growth from the historical baseline."
+      - name: anomaly_status
+        description: "Classifies observations as non-comparable, insufficient history, no variance baseline, anomaly, or normal."
+      - name: anomaly_direction
+        description: "Indicates unusually high or unusually low growth when an anomaly is detected."
+      - name: current_accession_number
+        description: "SEC filing accession number for the current observation."
+      - name: prior_year_accession_number
+        description: "SEC filing accession number for the prior-year comparison."
+
+  - name: mart_financial_risk_indicators
+    description: "Quarterly financial monitoring indicators combining revenue growth deterioration, operating margin contraction, net income decline, and anomaly signals. These are monitoring flags, not a credit-risk score."
+    columns:
+      - name: company_cik
+        description: "SEC Central Index Key identifying the reporting company."
+        data_tests:
+          - not_null
+      - name: company_name
+        data_tests:
+          - not_null
+      - name: period_start
+        data_tests:
+          - not_null
+      - name: period_end
+        data_tests:
+          - not_null
+      - name: revenue
+        description: "Current-quarter reported revenue."
+      - name: prior_year_revenue
+        description: "Revenue for the comparable prior-year quarter."
+      - name: revenue_yoy_growth_pct
+        description: "Revenue year-over-year growth percentage."
+      - name: operating_income
+        description: "Current-quarter operating income."
+      - name: operating_margin
+        description: "Operating income divided by revenue when the underlying financial concept is unambiguous and revenue is positive."
+      - name: prior_year_operating_margin
+        description: "Operating margin for the comparable prior-year quarter."
+      - name: operating_margin_change_pp
+        description: "Year-over-year operating margin movement in percentage points."
+      - name: operating_income_yoy_growth_pct
+        description: "Operating income year-over-year growth percentage."
+      - name: net_income
+        description: "Current-quarter net income."
+      - name: prior_year_net_income
+        description: "Net income for the comparable prior-year quarter."
+      - name: net_income_yoy_growth_pct
+        description: "Net income year-over-year growth percentage."
+      - name: revenue_concept_count
+        description: "Number of distinct revenue concepts contributing to the quarter."
+      - name: operating_income_concept_count
+        description: "Number of distinct operating income concepts contributing to the quarter."
+      - name: net_income_concept_count
+        description: "Number of distinct net income concepts contributing to the quarter."
+      - name: anomaly_observation_count
+        description: "Number of anomaly observations available for the company-quarter."
+      - name: flagged_anomaly_count
+        description: "Number of observations classified as anomalies."
+      - name: revenue_growth_decline_flag
+        description: "True when comparable revenue year-over-year growth is negative."
+      - name: operating_margin_contraction_flag
+        description: "True when current operating margin is below the comparable prior-year margin."
+      - name: net_income_growth_decline_flag
+        description: "True when comparable net income year-over-year growth is negative."
+      - name: financial_anomaly_flag
+        description: "True when one or more financial anomaly observations are flagged."
+      - name: risk_indicator_count
+        description: "Count of the four monitoring flags; not a predictive risk score."
+      - name: monitoring_status
+        description: "Monitoring state: review required, no flagged indicators, or insufficient data."
+      - name: model_created_at
+        description: "Timestamp when the dbt model was evaluated."
