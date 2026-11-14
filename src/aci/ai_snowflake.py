@@ -1,4 +1,4 @@
-import os
+import re
 from pathlib import Path
 
 from dotenv import dotenv_values
@@ -16,36 +16,40 @@ APPROVED_MARTS = {
 }
 
 
-def get_connection():
+def _configuration():
     env = dotenv_values(Path(__file__).resolve().parents[2] / ".env")
 
-    required = [
-        "ACI_AI_SNOWFLAKE_ACCOUNT",
-        "ACI_AI_SNOWFLAKE_USER",
-        "ACI_AI_SNOWFLAKE_TOKEN",
-        "ACI_AI_SNOWFLAKE_WAREHOUSE",
-        "ACI_AI_SNOWFLAKE_DATABASE",
-        "ACI_AI_SNOWFLAKE_SCHEMA",
-        "ACI_AI_SNOWFLAKE_ROLE",
-        "ACI_AI_SNOWFLAKE_AUTHENTICATOR",
-    ]
+    config = {
+        "account": env.get("SNOWFLAKE_ACCOUNT"),
+        "user": env.get("SNOWFLAKE_USER"),
+        "password": env.get("SNOWFLAKE_PASSWORD"),
+        "warehouse": env.get("SNOWFLAKE_WAREHOUSE"),
+        "database": env.get("SNOWFLAKE_DATABASE"),
+        "schema": env.get("ACI_AI_SNOWFLAKE_SCHEMA") or "DBT_DEV",
+        "role": env.get("SNOWFLAKE_ROLE"),
+    }
 
-    missing = [key for key in required if not env.get(key)]
+    missing = [
+        key for key, value in config.items()
+        if key != "role" and not value
+    ]
     if missing:
         raise RuntimeError(
-            "Missing AI Snowflake configuration: " + ", ".join(missing)
+            "Missing Snowflake configuration: " + ", ".join(missing)
         )
 
-    return snowflake.connector.connect(
-        account=env["ACI_AI_SNOWFLAKE_ACCOUNT"],
-        user=env["ACI_AI_SNOWFLAKE_USER"],
-        token=env["ACI_AI_SNOWFLAKE_TOKEN"],
-        authenticator=env["ACI_AI_SNOWFLAKE_AUTHENTICATOR"],
-        warehouse=env["ACI_AI_SNOWFLAKE_WAREHOUSE"],
-        database=env["ACI_AI_SNOWFLAKE_DATABASE"],
-        schema=env["ACI_AI_SNOWFLAKE_SCHEMA"],
-        role=env["ACI_AI_SNOWFLAKE_ROLE"],
-    )
+    for key in ("database", "schema"):
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_$]*", config[key]):
+            raise ValueError(f"Invalid Snowflake {key} identifier.")
+
+    return config
+
+
+def get_connection():
+    config = _configuration()
+    if not config["role"]:
+        config.pop("role")
+    return snowflake.connector.connect(**config)
 
 
 def fetch_mart_rows(mart_name: str, limit: int = 100) -> list[dict]:
@@ -57,14 +61,10 @@ def fetch_mart_rows(mart_name: str, limit: int = 100) -> list[dict]:
     if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= 500:
         raise ValueError("Limit must be an integer between 1 and 500.")
 
-    env = dotenv_values(Path(__file__).resolve().parents[2] / ".env")
-    database = env["ACI_AI_SNOWFLAKE_DATABASE"]
-    schema = env["ACI_AI_SNOWFLAKE_SCHEMA"]
-
-    # Database and schema come from local configuration, not user or LLM input.
+    config = _configuration()
     sql = (
-        f"SELECT * FROM {database}.{schema}.{mart_name} "
-        f"LIMIT {limit}"
+        f"SELECT * FROM {config['database']}."
+        f"{config['schema']}.{mart_name} LIMIT {limit}"
     )
 
     conn = get_connection()
