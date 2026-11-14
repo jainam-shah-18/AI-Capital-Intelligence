@@ -52,3 +52,9 @@ v4_code_review.zip
 .DS_Store
 .idea/
 .vscode/
+
+# Local Snowflake token export
+ACI_02_2026-11-08-1152.csv
+
+# Generated AI vector store
+data/vector_store/

@@ -18,6 +18,13 @@ x-airflow-common: &airflow-common
     AWS_DEFAULT_REGION: ${AWS_REGION:-ap-south-1}
     S3_BUCKET: ${S3_BUCKET:?S3_BUCKET missing from root .env}
     AWS_SHARED_CREDENTIALS_FILE: /opt/airflow/aws/credentials
+    SNOWFLAKE_ACCOUNT: ${SNOWFLAKE_ACCOUNT}
+    SNOWFLAKE_USER: ${SNOWFLAKE_USER}
+    SNOWFLAKE_PASSWORD: ${SNOWFLAKE_PASSWORD}
+    SNOWFLAKE_WAREHOUSE: ${SNOWFLAKE_WAREHOUSE}
+    SNOWFLAKE_DATABASE: ${SNOWFLAKE_DATABASE}
+    SNOWFLAKE_SCHEMA: ${SNOWFLAKE_SCHEMA}
+    SNOWFLAKE_ROLE: ${SNOWFLAKE_ROLE}
   volumes:
     - ../../src:/opt/airflow/aci/src:ro
     - ../../data:/opt/airflow/aci/data

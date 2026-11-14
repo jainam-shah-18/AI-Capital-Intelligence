@@ -1,132 +1,111 @@
-# AI Capital Intelligence
+﻿# AI Capital Intelligence
 
-An industry-style financial data platform prototype that ingests public SEC company facts, normalizes selected financial metrics, stores raw and curated data, and optionally publishes to AWS S3 and Snowflake.
+An end-to-end financial intelligence platform that transforms SEC filings into governed financial analytics, company comparisons, anomaly detection, forecasts and AI-assisted explanations.
 
-## Day 1 scope
-
-- Real source: SEC EDGAR Company Facts API (no API key required).
-- Companies: Amazon (AMZN), Microsoft (MSFT), Alphabet (GOOGL), Meta (META).
-- Raw layer: downloaded SEC JSON snapshots.
-- Curated layer: normalized quarterly and annual financial metrics in CSV and Parquet.
-- Optional cloud sinks: private AWS S3 bucket and Snowflake table.
-- Tests: offline transformation tests with synthetic fixtures.
-
-> Financial data is reported company data, not an estimate of AI-specific revenue or AI-specific return on investment. SEC company facts generally describe company-wide financial metrics. We will not claim that they isolate AI infrastructure returns.
+## Companies
+Amazon (AMZN) | Microsoft (MSFT) | Alphabet (GOOGL) | Meta (META)
 
 ## Architecture
+SEC EDGAR API -> Python ingestion -> AWS S3 -> Snowflake RAW/STAGING -> dbt analytics -> Power BI.
 
-SEC EDGAR Company Facts -> Python ingestion -> local raw/curated files -> AWS S3 (optional) -> Snowflake (optional).
+Apache Airflow orchestrates ingestion and output validation. The AI application uses local LLM inference and vector retrieval.
 
-Airflow, PySpark, dbt, ML, RAG, API and BI layers are planned for subsequent project days. They are not represented as completed in this starter.
+## Technology Stack
+- Python, Pandas, NumPy, Pytest
+- SEC EDGAR Company Facts API
+- AWS S3
+- Snowflake
+- dbt Core
+- Apache Airflow and Docker
+- GitHub Actions
+- Power BI
+- Ollama, Llama 3.2, ChromaDB
+- FastAPI and Streamlit
 
-## Requirements
+## Data Engineering
+The Python pipeline extracts and normalizes SEC financial observations and writes CSV and Parquet outputs. It supports S3 uploads and Snowflake loading.
 
-- Windows 10/11
-- Python 3.11 or 3.12
-- Git
-- AWS CLI v2 (only if using S3)
-- Snowflake account (optional on Day 1)
+Snowflake layers:
+- RAW: ingested financial metrics
+- STAGING: SEC observations and eligibility filtering
+- ANALYTICS: analytical source views
+- DBT_DEV: transformed analytical models
 
-## 1. Create the environment (PowerShell)
+## dbt Analytics
+- 18 dbt models
+- 2 seeds
+- 1 source
+- 61 data tests
 
-```powershell
-cd path\to\ai-capital-intelligence
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-Copy-Item .env.example .env
-```
+Capabilities include canonical metric selection, filing evidence validation, quarterly period alignment, cash-flow derivation, company comparison, revenue forecasting, anomaly detection and financial risk indicators.
 
-If PowerShell blocks activation, run:
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\.venv\Scripts\Activate.ps1
-```
+Latest validation: 18/18 models built successfully; 61/61 tests passed.
 
-## 2. Configure SEC identification
+## Cash Flow Accounting
+Quarterly cash-flow derivation supports Q2 = H1 - Q1, Q3 = nine-month cumulative - H1, and Q4 = annual cumulative - nine-month cumulative.
 
-Open `.env` and set `SEC_USER_AGENT` to identify your application and a contact email, for example:
+Reported quarterly values are preferred when available.
 
-`SEC_USER_AGENT=AI-Capital-Intelligence contact your.email@example.com`
+Important: CAPEX reporting-basis approval remains unresolved. FREE_CASH_FLOW is intentionally NULL. FREE_CASH_FLOW_CANDIDATE is an arithmetic candidate and must not be presented as approved official free cash flow.
 
-Use your own email address. Do not commit `.env`.
+## Power BI
+The repository includes AI_Capital_Intelligence.pbix with six interactive dashboard pages covering financial performance, company comparison, cash flow, forecasting, anomalies and risk.
 
-The SEC's public data APIs do not require API keys. Automated access must follow SEC fair-access guidance and identify the requesting application.
+## AI Financial Intelligence
+The local AI application includes:
+- Ollama with Llama 3.2 3B
+- ChromaDB retrieval
+- Financial assistant and retrieval modules
+- FastAPI service
+- Streamlit interface
 
-## 3. Run the real-data pipeline locally
+Ollama inference has been tested successfully. Direct AI-to-Snowflake querying requires valid AI-specific Snowflake authentication, which is not currently configured. The main Python, Snowflake and dbt pipeline is operational independently.
 
-```powershell
-python -m src.aci.pipeline
-```
+## Airflow
+DAG: aci_sec_financial_pipeline
 
-Expected outputs:
-- `data/raw/sec/AMZN_companyfacts.json` (and other companies)
-- `data/processed/financial_metrics.csv`
-- `data/processed/financial_metrics.parquet`
+Tasks:
+- run_sec_pipeline
+- validate_pipeline_outputs
 
-The pipeline makes one Company Facts request per company and pauses briefly between requests.
+The DAG is registered, unpaused and its manual execution has succeeded. dbt runs and tests are executed separately, not as tasks in this DAG.
 
-## 4. Run tests
+## Validation Results
+- Python tests: 38 passed
+- dbt models: 18 passed
+- dbt tests: 61 passed
+- Python compilation: passed
+- Dependency check: no broken requirements
+- Ollama inference: passed
+- Airflow DAG: registered and unpaused
+- SEC pipeline: 4,529 observations extracted and loaded
 
-```powershell
-pytest -q
-```
+## Running the Project
 
-Tests use synthetic data and do not call SEC or cloud services.
+Python tests:
+    python -m pytest -q
 
-## 5. Optional AWS S3 upload
+Python ingestion:
+    python -m src.aci.pipeline
 
-Configure AWS credentials using an IAM identity with least-privilege access to the target bucket. Prefer AWS IAM Identity Center / `aws configure sso` where available; do not put AWS access keys in source code.
+dbt commands (from the dbt directory):
+    dbt debug
+    dbt run
+    dbt test
 
-```powershell
-aws configure
-aws sts get-caller-identity
-```
+Airflow (from the project root):
+    docker compose --env-file .\.env --env-file .\orchestration\airflow\.env.airflow -f .\orchestration\airflow\docker-compose.yaml up -d --build
 
-Create a private bucket in your preferred region, keep Block Public Access enabled, enable default encryption, and set a lifecycle rule if retaining repeated raw snapshots. Put the bucket name in `.env` as `S3_BUCKET`.
+Configure local credentials and dbt profiles before running cloud-connected components. Never commit secrets or environment files.
 
-Then run:
-```powershell
-python -m src.aci.pipeline
-```
+## Security and Limitations
+- Keep credentials, tokens and private keys out of Git.
+- Keep S3 buckets private and use least-privilege permissions.
+- Do not commit virtual environments, generated vector stores or temporary exports.
+- SEC XBRL concepts and reporting practices can differ between companies.
+- Missing financial observations are not fabricated.
+- Forecasts are analytical estimates, not reported results.
+- This platform is for financial analytics and demonstration, not investment advice.
 
-When `S3_BUCKET` is set, raw JSON and curated files are uploaded to:
-- `raw/sec/companyfacts/<TICKER>/...`
-- `curated/financial_metrics/...`
-
-## 6. Optional Snowflake setup
-
-Run `warehouse/schema.sql` in a Snowflake worksheet using a role allowed to create a database, schema, warehouse and table. The warehouse is X-Small with auto-suspend after 60 seconds and auto-resume enabled. It is created suspended. Start it only when loading/querying data and monitor remaining trial credits.
-
-Set the Snowflake variables in `.env`, then run:
-```powershell
-python -m src.aci.pipeline
-```
-
-The pipeline loads curated rows into `FINANCIAL_METRICS` when Snowflake settings are supplied.
-
-## Data interpretation
-
-- Amounts are normalized to USD.
-- Quarterly values use reported facts with approximately 70–110 day durations.
-- Annual values use approximately 330–380 day durations.
-- Some companies/tags may not expose every metric for every period. Missing values are omitted rather than fabricated.
-- Free cash flow is calculated as operating cash flow minus capital expenditure (capital expenditure normalized as a positive outflow).
-- Financial statement tags and reporting practices can differ. Validate values against source filings before making investment conclusions.
-
-## Security and cost controls
-
-- Never commit `.env`, AWS credentials, Snowflake passwords, tokens or private keys.
-- Keep the S3 bucket private and Block Public Access enabled.
-- Do not enable public access or create broad IAM administrator keys for this project.
-- Keep the Snowflake warehouse X-Small and auto-suspend enabled; stop it when not in use.
-- Check AWS and Snowflake billing/credit dashboards regularly. Free-tier eligibility and trial credits vary by account and region.
-
-## Repository status
-
-This is the Day 1 starter scaffold. Cloud services are not connected until you configure credentials and run the relevant setup steps.
-=======
-# AI-Capital-Intelligence
-End-to-end AI-powered financial intelligence platform using SEC data, Python, Snowflake, dbt, AWS, Airflow, Docker and CI/CD.
-
+## License
+See LICENSE.
