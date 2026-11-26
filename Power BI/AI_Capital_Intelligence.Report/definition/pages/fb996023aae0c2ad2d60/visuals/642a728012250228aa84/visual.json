@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "642a728012250228aa84",
+  "position": {
+    "x": 734,
+    "y": 148,
+    "z": 63000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 63000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                    }
+                  },
+                  "Property": "Companies Monitored"
+                }
+              },
+              "queryRef": "MART_FINANCIAL_RISK_INDICATORS.Companies Monitored",
+              "nativeQueryRef": "Companies Monitored",
+              "format": "0"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                  }
+                },
+                "Property": "Companies Monitored"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

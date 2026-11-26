@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "dyn8898b5ff27d94c42ad53",
+  "position": {
+    "x": 717.66964270758308,
+    "y": 112.52181778589257,
+    "z": 51000,
+    "height": 74.099733663880471,
+    "width": 253.8601986632942,
+    "tabOrder": 51000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_PIPELINE_RUN_MONITORING"
+                    }
+                  },
+                  "Property": "Latest Pipeline Run Time"
+                }
+              },
+              "queryRef": "MART_PIPELINE_RUN_MONITORING.Latest Pipeline Run Time",
+              "nativeQueryRef": "Latest Pipeline Run Time"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_PIPELINE_RUN_MONITORING"
+                  }
+                },
+                "Property": "Latest Pipeline Run Time"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
+            "customFormatString": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dd/MM/yyyy'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MART_PIPELINE_RUN_MONITORING.Latest Pipeline Run Time"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b92b4f7395e5b64ba6c6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MART_PIPELINE_RUN_MONITORING"
+              }
+            },
+            "Property": "Latest Pipeline Run Time"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "0f4ed00e3778beba0500",
+  "position": {
+    "x": 461,
+    "y": 148,
+    "z": 62000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 62000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_CASH_FLOW_ANALYSIS"
+                    }
+                  },
+                  "Property": "Total Capital Expenditure"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.Total Capital Expenditure",
+              "nativeQueryRef": "Total Capital Expenditure",
+              "format": "\"₹\" #,0.00;\"₹\" -#,0.00;\"₹\" #,0.00"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_CASH_FLOW_ANALYSIS"
+                  }
+                },
+                "Property": "Total Capital Expenditure"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000000000D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MART_CASH_FLOW_ANALYSIS.Total Capital Expenditure"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

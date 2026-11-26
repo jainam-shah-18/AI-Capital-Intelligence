@@ -1,0 +1,205 @@
+table MART_PIPELINE_RUN_MONITORING
+	lineageTag: cdd7c348-0271-425c-a0c7-7be7d1e5e91c
+
+	measure 'Latest Pipeline Status' =
+			
+			CALCULATE(
+			    SELECTEDVALUE(
+			        MART_PIPELINE_RUN_MONITORING[STATUS]
+			    ),
+			    MART_PIPELINE_RUN_MONITORING[COMPONENT] = "PIPELINE",
+			    MART_PIPELINE_RUN_MONITORING[IS_LATEST_RUN] = TRUE()
+			)
+		lineageTag: 1a8c244d-24f4-470c-a382-2439307399cf
+
+	measure 'Latest Pipeline Run Time' =
+			
+			CALCULATE(
+			    MAX(MART_PIPELINE_RUN_MONITORING[STARTED_AT]),
+			    MART_PIPELINE_RUN_MONITORING[COMPONENT] = "PIPELINE",
+			    MART_PIPELINE_RUN_MONITORING[IS_LATEST_RUN] = TRUE()
+			)
+		formatString: General Date
+		lineageTag: ba07c501-7978-4c0b-9048-5ed147256335
+
+	measure 'Latest Rows Loaded' =
+			
+			CALCULATE(
+			    MAX(MART_PIPELINE_RUN_MONITORING[ROWS_LOADED]),
+			    MART_PIPELINE_RUN_MONITORING[COMPONENT] = "PIPELINE",
+			    MART_PIPELINE_RUN_MONITORING[IS_LATEST_RUN] = TRUE()
+			)
+		lineageTag: e715f570-b38e-4d6b-b131-8a31af3fe25e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Successful Pipeline Components' =
+			
+			CALCULATE(
+			    COUNTROWS(MART_PIPELINE_RUN_MONITORING),
+			    MART_PIPELINE_RUN_MONITORING[STATUS] = "SUCCESS",
+			    MART_PIPELINE_RUN_MONITORING[COMPONENT] <> "PIPELINE",
+			    MART_PIPELINE_RUN_MONITORING[IS_LATEST_RUN] = TRUE()
+			)
+		formatString: 0
+		lineageTag: 2a6d2bd8-86c2-4af8-a349-9c5585b6c377
+
+	measure 'Failed Pipeline Components' =
+			
+			CALCULATE(
+			    COUNTROWS(MART_PIPELINE_RUN_MONITORING),
+			    MART_PIPELINE_RUN_MONITORING[STATUS] <> "SUCCESS",
+			    MART_PIPELINE_RUN_MONITORING[COMPONENT] <> "PIPELINE",
+			    MART_PIPELINE_RUN_MONITORING[IS_LATEST_RUN] = TRUE()
+			)
+		formatString: 0
+		lineageTag: 8c1073a0-c8c6-4632-8dc3-242fd5865a83
+
+	column RUN_ID
+		dataType: string
+		lineageTag: eb918687-1618-4d06-8551-fe9f30eab0ef
+		summarizeBy: none
+		sourceColumn: RUN_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PIPELINE_NAME
+		dataType: string
+		lineageTag: 37b6019d-a54b-4234-a561-51f31a3a60ae
+		summarizeBy: none
+		sourceColumn: PIPELINE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPONENT
+		dataType: string
+		lineageTag: d85d6b57-af12-4ec6-a512-35c4e9e35ca7
+		summarizeBy: none
+		sourceColumn: COMPONENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: a90110e7-ff9b-4b35-a468-fca272558f12
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STARTED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 48ce82cd-d7ba-4349-8136-b7687d554b25
+		summarizeBy: none
+		sourceColumn: STARTED_AT
+
+		variation Variation
+			isDefault
+			relationship: e41f248e-fd8d-48a1-bd27-632329bb6dcd
+			defaultHierarchy: LocalDateTable_d818b436-82bf-4952-ac04-5d981ac0fe05.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FINISHED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ef18358c-76ba-403b-9f43-21172b3151c9
+		summarizeBy: none
+		sourceColumn: FINISHED_AT
+
+		variation Variation
+			isDefault
+			relationship: f397b398-052e-4aa7-802a-2f92acb2b047
+			defaultHierarchy: LocalDateTable_8a28e839-c4f4-4f21-ba3c-0778d3885b02.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DURATION_SECONDS
+		dataType: double
+		lineageTag: 632a95bd-2f9d-43b8-9548-b7642d2c92e1
+		summarizeBy: sum
+		sourceColumn: DURATION_SECONDS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROWS_EXTRACTED
+		dataType: double
+		lineageTag: b19e8866-b483-467c-92b2-9ec6f639dbc8
+		summarizeBy: sum
+		sourceColumn: ROWS_EXTRACTED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROWS_LOADED
+		dataType: double
+		lineageTag: a8832b79-a3f2-45c4-a341-4431535541a5
+		summarizeBy: sum
+		sourceColumn: ROWS_LOADED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SOURCE_NAME
+		dataType: string
+		lineageTag: f6d56aad-fc91-4d0e-9632-d0f9c7c9de91
+		summarizeBy: none
+		sourceColumn: SOURCE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TARGET_NAME
+		dataType: string
+		lineageTag: e709f0df-ffb3-47c3-a0a4-55c464bda563
+		summarizeBy: none
+		sourceColumn: TARGET_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column ERROR_MESSAGE
+		dataType: string
+		lineageTag: 845d8f1d-5690-4ad2-a6d6-eca3a0e0c440
+		summarizeBy: none
+		sourceColumn: ERROR_MESSAGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 149ae78f-9e09-4e8d-8c5a-7dae287c00d5
+		summarizeBy: none
+		sourceColumn: CREATED_AT
+
+		variation Variation
+			isDefault
+			relationship: 795e988e-b730-47a2-aca3-d0c08cb4eaa5
+			defaultHierarchy: LocalDateTable_14e77bd6-1288-4333-b37b-18ff0bd6373d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_LATEST_RUN
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cd667e2d-6ffe-41e5-9061-777357578386
+		summarizeBy: none
+		sourceColumn: IS_LATEST_RUN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MART_PIPELINE_RUN_MONITORING = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("JSNWNCR-EI63147.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    ACI_DB_Database = Source{[Name="ACI_DB",Kind="Database"]}[Data],
+				    DBT_DEV_Schema = ACI_DB_Database{[Name="DBT_DEV",Kind="Schema"]}[Data],
+				    MART_PIPELINE_RUN_MONITORING_Table = DBT_DEV_Schema{[Name="MART_PIPELINE_RUN_MONITORING",Kind="Table"]}[Data]
+				in
+				    MART_PIPELINE_RUN_MONITORING_Table
+

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "c3d6e6f05b02eb6a8c72",
+  "position": {
+    "x": 461,
+    "y": 148,
+    "z": 62000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 62000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                    }
+                  },
+                  "Property": "Total Risk Indicators"
+                }
+              },
+              "queryRef": "MART_FINANCIAL_RISK_INDICATORS.Total Risk Indicators",
+              "nativeQueryRef": "Total Risk Indicators",
+              "format": "0"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                  }
+                },
+                "Property": "Total Risk Indicators"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

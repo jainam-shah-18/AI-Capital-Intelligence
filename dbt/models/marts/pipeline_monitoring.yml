@@ -1,0 +1,43 @@
+﻿version: 2
+
+models:
+  - name: stg_pipeline_run_log
+    description: "Staging view for actual pipeline execution logs."
+    columns:
+      - name: run_id
+        data_tests:
+          - not_null
+      - name: pipeline_name
+        data_tests:
+          - not_null
+      - name: component
+        data_tests:
+          - not_null
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['RUNNING', 'SUCCESS', 'FAILED', 'NOT_CONFIGURED']
+
+  - name: mart_pipeline_run_monitoring
+    description: "Operational pipeline execution history and latest-run identification."
+    columns:
+      - name: run_id
+        data_tests:
+          - not_null
+      - name: pipeline_name
+        data_tests:
+          - not_null
+      - name: component
+        data_tests:
+          - not_null
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['RUNNING', 'SUCCESS', 'FAILED', 'NOT_CONFIGURED']
+      - name: is_latest_run
+        data_tests:
+          - not_null

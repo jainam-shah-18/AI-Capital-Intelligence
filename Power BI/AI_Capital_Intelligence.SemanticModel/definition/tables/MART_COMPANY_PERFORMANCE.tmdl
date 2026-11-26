@@ -1,0 +1,383 @@
+table MART_COMPANY_PERFORMANCE
+	lineageTag: 9af41486-e43a-4ef0-bb0d-a529a7aec2b2
+
+	measure 'Total Net Income' =
+			
+			SUM ( MART_COMPANY_PERFORMANCE[NET_INCOME])
+		lineageTag: 9c4f8dcd-fb84-44d4-943b-af140127077f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Operating Income' =
+			
+			SUM ( MART_COMPANY_PERFORMANCE[OPERATING_INCOME])
+		lineageTag: 1aa2a794-f8ed-43d6-9f08-401245186d43
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Latest Reporting Period' =
+			
+			CALCULATE (
+			    MAX ( MART_COMPANY_PERFORMANCE[PERIOD_END] ),
+			    REMOVEFILTERS ( MART_COMPANY_PERFORMANCE[PERIOD_END] )
+			)
+		formatString: General Date
+		lineageTag: ff7b25fd-b302-4bb8-adfe-d05fe37d766e
+
+	measure 'Total Revenue' =
+			
+			VAR LatestDate = [Latest Reporting Period]
+			RETURN
+			    CALCULATE (
+			        SUM ( MART_COMPANY_PERFORMANCE[REVENUE] ),
+			        MART_COMPANY_PERFORMANCE[PERIOD_END] = LatestDate
+			    )
+		lineageTag: 04c93672-ba29-4087-a898-34ca107850ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Income' =
+			
+			VAR LatestDate = [Latest Reporting Period]
+			RETURN
+			    CALCULATE (
+			        SUM ( MART_COMPANY_PERFORMANCE[NET_INCOME] ),
+			        MART_COMPANY_PERFORMANCE[PERIOD_END] = LatestDate
+			    )
+		lineageTag: c35b06e3-bf70-4f58-bdee-024ce55ba15b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Operating Income' =
+			
+			VAR LatestDate = [Latest Reporting Period]
+			RETURN
+			    CALCULATE (
+			        SUM ( MART_COMPANY_PERFORMANCE[OPERATING_INCOME] ),
+			        MART_COMPANY_PERFORMANCE[PERIOD_END] = LatestDate
+			    )
+		lineageTag: 13439890-e2e7-4189-9119-7a535754b4e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Operating Margin' =
+			
+			DIVIDE (
+			    [Operating Income],
+			    [Total Revenue]
+			)
+		lineageTag: 933a0819-81f4-4125-9ca6-dba8820fd266
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue CAGR %' =
+			
+			VAR StartDate =
+			    MIN ( MART_COMPANY_PERFORMANCE[PERIOD_END] )
+			VAR EndDate =
+			    MAX ( MART_COMPANY_PERFORMANCE[PERIOD_END] )
+			VAR StartRevenue =
+			    CALCULATE (
+			        SUM ( MART_COMPANY_PERFORMANCE[REVENUE] ),
+			        MART_COMPANY_PERFORMANCE[PERIOD_END] = StartDate
+			    )
+			VAR EndRevenue =
+			    CALCULATE (
+			        SUM ( MART_COMPANY_PERFORMANCE[REVENUE] ),
+			        MART_COMPANY_PERFORMANCE[PERIOD_END] = EndDate
+			    )
+			VAR Years =
+			    DIVIDE ( DATEDIFF ( StartDate, EndDate, DAY ), 365.25 )
+			RETURN
+			    IF (
+			        StartRevenue > 0 && EndRevenue > 0 && Years > 0,
+			        POWER ( DIVIDE ( EndRevenue, StartRevenue ), DIVIDE ( 1, Years ) ) - 1
+			    )
+		lineageTag: abf1446a-79bb-4c3e-8a05-ac650e725acb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Income Margin %' =
+			
+			DIVIDE (
+			    SUM ( MART_COMPANY_PERFORMANCE[NET_INCOME] ),
+			    SUM ( MART_COMPANY_PERFORMANCE[REVENUE] )
+			)
+		lineageTag: 80080f76-ad78-432e-8f28-68360e390f57
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue per Quarter' =
+			
+			DIVIDE (
+			    SUM ( MART_COMPANY_PERFORMANCE[REVENUE] ),
+			    DISTINCTCOUNT ( MART_COMPANY_PERFORMANCE[PERIOD_END] )
+			)
+		lineageTag: af202755-e803-4ed0-ac79-f167d07eecdd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Financial Records' = COUNTROWS ( MART_COMPANY_PERFORMANCE )
+		lineageTag: 664dd251-a673-44dd-a6e6-c3a9d78e3ffd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPANY_CIK
+		dataType: string
+		lineageTag: 573deff7-4add-45df-a007-1851933ba9fe
+		summarizeBy: none
+		sourceColumn: COMPANY_CIK
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_NAME
+		dataType: string
+		lineageTag: f78fbe50-fe2c-4414-ada4-6924cdef0dff
+		summarizeBy: none
+		sourceColumn: COMPANY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column REPORTING_PERIOD_KEY
+		dataType: string
+		lineageTag: d6cbc128-7a6e-4184-a6d6-e8cd4d95244a
+		summarizeBy: none
+		sourceColumn: REPORTING_PERIOD_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERIOD_START
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1ae3820f-07f6-4031-8891-858b33ea2387
+		summarizeBy: none
+		sourceColumn: PERIOD_START
+
+		variation Variation
+			isDefault
+			relationship: 563e3605-51d5-4c7e-9728-17aca74d5656
+			defaultHierarchy: LocalDateTable_781abb73-3bca-4e49-b043-561c89fe1147.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PERIOD_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ed714e09-1bcc-4c97-a822-6d1ba76108bc
+		summarizeBy: none
+		sourceColumn: PERIOD_END
+
+		variation Variation
+			isDefault
+			relationship: 00329325-922c-4e45-b52b-349bc48ebd91
+			defaultHierarchy: LocalDateTable_3eb64694-db2e-48cd-a034-44eb4bf6dab6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DURATION_CLASS
+		dataType: string
+		lineageTag: fc677601-6cef-44ec-b81d-1e4e1fba86b8
+		summarizeBy: none
+		sourceColumn: DURATION_CLASS
+
+		annotation SummarizationSetBy = Automatic
+
+	column FILING_FISCAL_YEAR
+		dataType: double
+		lineageTag: 84162107-c437-4a93-89dd-f6017f8f8da9
+		summarizeBy: sum
+		sourceColumn: FILING_FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FILING_FISCAL_PERIOD
+		dataType: string
+		lineageTag: c2b18e5d-aeb7-4ca3-8db8-1df913e3fefa
+		summarizeBy: none
+		sourceColumn: FILING_FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column REVENUE
+		dataType: double
+		lineageTag: ed956dfc-1712-4f16-b784-5a8f5a6f05c3
+		summarizeBy: none
+		sourceColumn: REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_INCOME
+		dataType: double
+		lineageTag: 08bf4062-5693-431b-864c-d32f6c7b90c0
+		summarizeBy: sum
+		sourceColumn: OPERATING_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_INCOME
+		dataType: double
+		lineageTag: 69316082-2405-4d7f-9e06-dd2c53a0dad3
+		summarizeBy: sum
+		sourceColumn: NET_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_CASH_FLOW
+		dataType: double
+		lineageTag: 761157ee-6d13-493d-b4b7-7f6f22bb908a
+		summarizeBy: sum
+		sourceColumn: OPERATING_CASH_FLOW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAPEX
+		dataType: double
+		lineageTag: ca2f128e-239d-467d-a359-669d89abb365
+		summarizeBy: sum
+		sourceColumn: CAPEX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FREE_CASH_FLOW
+		dataType: double
+		lineageTag: 529a8f1b-5389-4c09-ad9c-55bab73c8c23
+		summarizeBy: sum
+		sourceColumn: FREE_CASH_FLOW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_MARGIN_PCT
+		dataType: double
+		lineageTag: a63e7642-6832-4581-8bd8-d51b816237f5
+		summarizeBy: sum
+		sourceColumn: OPERATING_MARGIN_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_PROFIT_MARGIN_PCT
+		dataType: double
+		lineageTag: 7e6ce129-5bc9-474c-a1d7-e2f3bb74791a
+		summarizeBy: sum
+		sourceColumn: NET_PROFIT_MARGIN_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FREE_CASH_FLOW_MARGIN_PCT
+		dataType: double
+		lineageTag: c0fcd755-ad5a-46ea-b20c-da6d0d097314
+		summarizeBy: sum
+		sourceColumn: FREE_CASH_FLOW_MARGIN_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAPEX_INTENSITY_PCT
+		dataType: double
+		lineageTag: 647bb4a1-2fd9-46d6-9387-2b0deae18a59
+		summarizeBy: sum
+		sourceColumn: CAPEX_INTENSITY_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CASH_CONVERSION_PCT
+		dataType: double
+		lineageTag: 875370ab-5858-4d2e-a77e-9e45b1ce43da
+		summarizeBy: sum
+		sourceColumn: CASH_CONVERSION_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_QOQ_GROWTH_PCT
+		dataType: double
+		lineageTag: 9988cd04-31b6-4f32-8682-353badd67e7a
+		summarizeBy: sum
+		sourceColumn: REVENUE_QOQ_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_YOY_GROWTH_PCT
+		dataType: double
+		lineageTag: f42671f9-b102-499a-b4a3-e54ee9ac0d9d
+		summarizeBy: sum
+		sourceColumn: REVENUE_YOY_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_INCOME_QOQ_GROWTH_PCT
+		dataType: double
+		lineageTag: 17b045f5-6d8f-4ef2-989b-3edc00281388
+		summarizeBy: sum
+		sourceColumn: OPERATING_INCOME_QOQ_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_INCOME_QOQ_GROWTH_PCT
+		dataType: double
+		lineageTag: e685ff20-c1b0-4111-83d2-2b93785a6878
+		summarizeBy: sum
+		sourceColumn: NET_INCOME_QOQ_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MART_CREATED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a1f0e804-b73d-454b-977c-37320886f15d
+		summarizeBy: none
+		sourceColumn: MART_CREATED_AT
+
+		variation Variation
+			isDefault
+			relationship: 7eb9a2c9-edfd-4259-9f4f-2b0911abbab5
+			defaultHierarchy: LocalDateTable_0569c855-d38f-4178-99ac-3f106fa07bc0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MART_COMPANY_PERFORMANCE = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("jsnwncr-ei63147.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    ACI_DB_Database = Source{[Name="ACI_DB",Kind="Database"]}[Data],
+				    DBT_DEV_Schema = ACI_DB_Database{[Name="DBT_DEV",Kind="Schema"]}[Data],
+				    MART_COMPANY_PERFORMANCE_Table = DBT_DEV_Schema{[Name="MART_COMPANY_PERFORMANCE",Kind="Table"]}[Data]
+				in
+				    MART_COMPANY_PERFORMANCE_Table
+
+	annotation PBI_ResultType = Table
+

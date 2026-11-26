@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "93b06ee864212c110347",
+  "position": {
+    "x": 734,
+    "y": 148,
+    "z": 63000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 63000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_REVENUE_FORECAST"
+                    }
+                  },
+                  "Property": "Absolute Forecast Error"
+                }
+              },
+              "queryRef": "MART_REVENUE_FORECAST.Absolute Forecast Error",
+              "nativeQueryRef": "Absolute Forecast Error"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_REVENUE_FORECAST"
+                  }
+                },
+                "Property": "Absolute Forecast Error"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

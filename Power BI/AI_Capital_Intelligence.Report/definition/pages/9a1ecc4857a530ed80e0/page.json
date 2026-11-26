@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "9a1ecc4857a530ed80e0",
+  "displayName": "Peer Comparison",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

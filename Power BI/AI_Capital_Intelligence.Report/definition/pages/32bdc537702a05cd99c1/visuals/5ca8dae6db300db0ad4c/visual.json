@@ -1,0 +1,82 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "5ca8dae6db300db0ad4c",
+  "position": {
+    "x": 734,
+    "y": 148,
+    "z": 63000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 63000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_CASH_FLOW_ANALYSIS"
+                    }
+                  },
+                  "Property": "Average Operating Cash Flow per Period"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.Total Free Cash Flow",
+              "nativeQueryRef": "Average Operating Cash Flow per Period",
+              "format": "\"₹\" #,0.00;\"₹\" -#,0.00;\"₹\" #,0.00"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_CASH_FLOW_ANALYSIS"
+                  }
+                },
+                "Property": "Average Operating Cash Flow per Period"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
+            "showBlankAs": {
+              "expr": {
+                "Literal": {
+                  "Value": "'--'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

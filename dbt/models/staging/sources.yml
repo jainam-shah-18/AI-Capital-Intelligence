@@ -8,3 +8,11 @@ sources:
     tables:
       - name: int_financial_observations
         description: "Canonical financial observations with SEC filing provenance and period classifications."
+
+  - name: aci_monitoring
+    database: ACI_DB
+    schema: MONITORING
+    description: "Operational pipeline execution monitoring."
+    tables:
+      - name: pipeline_run_log
+        description: "Actual SEC pipeline component execution history and statuses."

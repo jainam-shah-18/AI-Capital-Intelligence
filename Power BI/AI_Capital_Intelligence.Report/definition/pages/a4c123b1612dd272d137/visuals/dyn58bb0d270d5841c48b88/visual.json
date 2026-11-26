@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "dyn58bb0d270d5841c48b88",
+  "position": {
+    "x": 451.45948843364215,
+    "y": 120.75512152632373,
+    "z": 50000,
+    "height": 65.8664299234493,
+    "width": 256.60463324343795,
+    "tabOrder": 50000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                    }
+                  },
+                  "Property": "Companies Monitored"
+                }
+              },
+              "queryRef": "MART_FINANCIAL_RISK_INDICATORS.Companies Monitored",
+              "nativeQueryRef": "Companies Monitored",
+              "format": "0"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MART_FINANCIAL_RISK_INDICATORS.Companies Monitored"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "297db3a3fe58f6230c67",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+              }
+            },
+            "Property": "Companies Monitored"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

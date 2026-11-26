@@ -1,0 +1,288 @@
+table MART_CASH_FLOW_ANALYSIS
+	lineageTag: 8d46d87a-d489-487a-964d-5919c120903b
+
+	measure 'Total Operating Cash Flow' =
+			
+			SUM ( MART_CASH_FLOW_ANALYSIS[OPERATING_CASH_FLOW] )
+		lineageTag: 8cbc8337-496a-4fec-8501-ad5c89496b25
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Capital Expenditure' =
+			
+			SUM ( MART_CASH_FLOW_ANALYSIS[CAPEX_REPORTED_VALUE] )
+		lineageTag: 5c1f38ae-a1bd-4bfa-9210-007ee6e24330
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Operating Cash Flow per Period' =
+			
+			DIVIDE (
+			    [Total Operating Cash Flow],
+			    DISTINCTCOUNT ( MART_CASH_FLOW_ANALYSIS[PERIOD_END] )
+			)
+		lineageTag: 9d03d537-df02-4c7b-93f5-327206efecb3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Operating Cash Flow Periods' =
+			
+			DISTINCTCOUNT ( MART_CASH_FLOW_ANALYSIS[PERIOD_END] )
+		formatString: 0
+		lineageTag: d525871a-5e36-40e2-b881-a4b9c1d8c95b
+
+	column COMPANY_CIK
+		dataType: string
+		lineageTag: f2639b59-8107-463e-bddf-2a2cc2261fa0
+		summarizeBy: none
+		sourceColumn: COMPANY_CIK
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_NAME
+		dataType: string
+		lineageTag: 73a2b743-5052-4d50-9118-92ece95b5921
+		summarizeBy: none
+		sourceColumn: COMPANY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT
+		dataType: string
+		lineageTag: df00713e-477f-4623-aaba-6ce5d1fc6c54
+		summarizeBy: none
+		sourceColumn: UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERIOD_START
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b38358f6-43e5-456f-83d9-a46f632dda59
+		summarizeBy: none
+		sourceColumn: PERIOD_START
+
+		variation Variation
+			isDefault
+			relationship: 4746ff2a-d300-4966-ba47-32125c020515
+			defaultHierarchy: LocalDateTable_69150415-066d-488e-8e5a-0380c0d921c6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PERIOD_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 498d453d-2868-4b77-b8a0-5bd10b553994
+		summarizeBy: none
+		sourceColumn: PERIOD_END
+
+		variation Variation
+			isDefault
+			relationship: 9bf26f55-c3d5-4f90-b26f-4e6352399fca
+			defaultHierarchy: LocalDateTable_afa5f047-8d1e-4847-8e33-99cc4e8d8390.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FILING_FISCAL_YEAR
+		dataType: double
+		lineageTag: 4aa717ab-bce9-4119-abcb-dcd854580124
+		summarizeBy: sum
+		sourceColumn: FILING_FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FILING_FISCAL_PERIOD
+		dataType: string
+		lineageTag: 9c1874e7-cf35-4b23-a2f0-d73cc0d3c98c
+		summarizeBy: none
+		sourceColumn: FILING_FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPERATING_CASH_FLOW
+		dataType: double
+		lineageTag: 44c39c69-0525-4e44-9507-c80e0a2af199
+		summarizeBy: sum
+		sourceColumn: OPERATING_CASH_FLOW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAPEX_REPORTED_VALUE
+		dataType: double
+		lineageTag: 4946f4a9-0cc2-467c-a997-b0b3bbe4377e
+		summarizeBy: sum
+		sourceColumn: CAPEX_REPORTED_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAPEX_CONCEPT_COUNT
+		dataType: double
+		lineageTag: 94e06a1e-483c-4e9c-871c-38dc028c5a59
+		summarizeBy: sum
+		sourceColumn: CAPEX_CONCEPT_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAPEX_CONCEPT_NAME
+		dataType: string
+		lineageTag: f2bb5a4a-8776-40dc-b669-5ba30ff46f37
+		summarizeBy: none
+		sourceColumn: CAPEX_CONCEPT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAPEX_REPORTING_BASIS
+		dataType: string
+		lineageTag: db626a39-d166-476f-bd6c-1a10e9cbfd01
+		summarizeBy: none
+		sourceColumn: CAPEX_REPORTING_BASIS
+
+		annotation SummarizationSetBy = Automatic
+
+	column FREE_CASH_FLOW
+		dataType: double
+		lineageTag: 6960c692-8a76-4c59-9824-89152b59a055
+		summarizeBy: sum
+		sourceColumn: FREE_CASH_FLOW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FREE_CASH_FLOW_STATUS
+		dataType: string
+		lineageTag: c8c6b5e7-b8f8-47de-8835-08585e35e9ba
+		summarizeBy: none
+		sourceColumn: FREE_CASH_FLOW_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAPEX_QUALITY_STATUS
+		dataType: string
+		lineageTag: 850a0c38-2ab8-4026-b9f3-9173409e3ffd
+		summarizeBy: none
+		sourceColumn: CAPEX_QUALITY_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column OCF_ACCESSION_NUMBER
+		dataType: string
+		lineageTag: 2fe73a95-1716-4b21-9b5c-c54c0fe1fa4d
+		summarizeBy: none
+		sourceColumn: OCF_ACCESSION_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAPEX_ACCESSION_NUMBER
+		dataType: string
+		lineageTag: 7accaa2e-d1e0-4ded-bc76-e7c2ce057a77
+		summarizeBy: none
+		sourceColumn: CAPEX_ACCESSION_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MODEL_CREATED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7b39a3eb-f449-44f3-bb3d-839efc1c6aac
+		summarizeBy: none
+		sourceColumn: MODEL_CREATED_AT
+
+		variation Variation
+			isDefault
+			relationship: 8d5c5fa6-4978-479e-b9e2-93150db2f127
+			defaultHierarchy: LocalDateTable_31b74fcf-a007-40d2-8315-5c23ef7cc09d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FREE_CASH_FLOW_CANDIDATE
+		dataType: double
+		lineageTag: 8051fc12-e017-4e69-befd-82a4d60d9321
+		summarizeBy: sum
+		sourceColumn: FREE_CASH_FLOW_CANDIDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FREE_CASH_FLOW_CANDIDATE_STATUS
+		dataType: string
+		lineageTag: 50d06018-f9ae-4149-a85a-d1416c067dd8
+		summarizeBy: none
+		sourceColumn: FREE_CASH_FLOW_CANDIDATE_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column OCF_VALUE_SOURCE
+		dataType: string
+		lineageTag: 76547cb7-0337-4ff5-a5c8-e8d34a587bab
+		summarizeBy: none
+		sourceColumn: OCF_VALUE_SOURCE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAPEX_VALUE_SOURCE
+		dataType: string
+		lineageTag: 389d7a80-0e25-4469-ac27-004a85230c6c
+		summarizeBy: none
+		sourceColumn: CAPEX_VALUE_SOURCE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OCF_DERIVATION_METHOD
+		dataType: string
+		lineageTag: ad00a933-4d68-495b-b697-3314ab5e8709
+		summarizeBy: none
+		sourceColumn: OCF_DERIVATION_METHOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAPEX_DERIVATION_METHOD
+		dataType: string
+		lineageTag: 144505cc-f0ff-4b9c-9d7e-24f3403cb075
+		summarizeBy: none
+		sourceColumn: CAPEX_DERIVATION_METHOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column OCF_DERIVATION_STATUS
+		dataType: string
+		lineageTag: 8cd1280e-d28c-4eaa-bc5a-6cc96b73df3e
+		summarizeBy: none
+		sourceColumn: OCF_DERIVATION_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAPEX_DERIVATION_STATUS
+		dataType: string
+		lineageTag: 1fd4b71f-4dbb-4fcd-b288-e55ab440e77f
+		summarizeBy: none
+		sourceColumn: CAPEX_DERIVATION_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MART_CASH_FLOW_ANALYSIS = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("jsnwncr-ei63147.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    ACI_DB_Database = Source{[Name="ACI_DB",Kind="Database"]}[Data],
+				    DBT_DEV_Schema = ACI_DB_Database{[Name="DBT_DEV",Kind="Schema"]}[Data],
+				    MART_CASH_FLOW_ANALYSIS_View = DBT_DEV_Schema{[Name="MART_CASH_FLOW_ANALYSIS",Kind="View"]}[Data]
+				in
+				    MART_CASH_FLOW_ANALYSIS_View
+
+	annotation PBI_ResultType = Table
+

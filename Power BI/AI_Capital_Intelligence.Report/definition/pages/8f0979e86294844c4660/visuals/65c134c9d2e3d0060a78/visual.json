@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "65c134c9d2e3d0060a78",
+  "position": {
+    "x": 461,
+    "y": 148,
+    "z": 62000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 62000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Net Income Margin %"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Net Income Margin %",
+              "nativeQueryRef": "Net Income Margin %",
+              "format": "0.00%;-0.00%;0.00%"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_COMPANY_PERFORMANCE"
+                  }
+                },
+                "Property": "Net Income Margin %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

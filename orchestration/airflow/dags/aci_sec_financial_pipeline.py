@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import pendulum
 
-from airflow.sdk import dag, task
+from airflow.sdk import dag, task, get_current_context
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ EXPECTED_METRICS = {
         "retries": 2,
         "retry_delay": timedelta(minutes=5),
     },
-    tags=["aci", "sec", "financial-data"],
+    tags=["aci", "sec", "financial-data", "monitoring"],
 )
 def aci_sec_financial_pipeline():
 
@@ -47,9 +47,23 @@ def aci_sec_financial_pipeline():
 
         from src.aci.pipeline import run
 
-        logger.info("Starting ACI SEC financial data pipeline")
-        run()
-        logger.info("ACI SEC financial data pipeline completed")
+        context = get_current_context()
+        dag_run = context["dag_run"]
+        airflow_run_id = dag_run.run_id
+
+        logger.info(
+            "Starting ACI SEC financial data pipeline. Airflow run ID: %s",
+            airflow_run_id,
+        )
+
+        run(run_id=airflow_run_id)
+
+        logger.info(
+            "ACI SEC financial data pipeline completed. Airflow run ID: %s",
+            airflow_run_id,
+        )
+
+        return airflow_run_id
 
     @task
     def validate_pipeline_outputs():
@@ -74,7 +88,9 @@ def aci_sec_financial_pipeline():
         missing = required_columns - set(csv_df.columns)
 
         if missing:
-            raise ValueError(f"Missing required columns: {sorted(missing)}")
+            raise ValueError(
+                f"Missing required columns: {sorted(missing)}"
+            )
 
         actual_tickers = set(csv_df["ticker"].dropna().unique())
         actual_metrics = set(csv_df["metric"].dropna().unique())

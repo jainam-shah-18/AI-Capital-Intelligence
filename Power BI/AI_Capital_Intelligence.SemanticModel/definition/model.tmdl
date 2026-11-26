@@ -1,0 +1,50 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["MART_COMPANY_COMPARISON","MART_COMPANY_PERFORMANCE","MART_REVENUE_FORECAST","MART_CASH_FLOW_ANALYSIS","MART_FINANCIAL_ANOMALIES","MART_FINANCIAL_RISK_INDICATORS","MART_PIPELINE_RUN_MONITORING"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table MART_COMPANY_COMPARISON
+ref table DateTableTemplate_c4034e40-c2ed-4630-9cee-4afd204261a8
+ref table LocalDateTable_cfa1a14d-e9f0-496d-ae39-dc2d5ac11bbd
+ref table LocalDateTable_0a71c876-ba87-429f-952f-fad77a62efc7
+ref table LocalDateTable_1b48b32a-bd8e-4aaa-9118-5dc6bbfe441c
+ref table MART_COMPANY_PERFORMANCE
+ref table LocalDateTable_781abb73-3bca-4e49-b043-561c89fe1147
+ref table LocalDateTable_3eb64694-db2e-48cd-a034-44eb4bf6dab6
+ref table LocalDateTable_0569c855-d38f-4178-99ac-3f106fa07bc0
+ref table MART_REVENUE_FORECAST
+ref table LocalDateTable_a7622121-d230-46ac-812f-e7f82090c632
+ref table LocalDateTable_89e5546d-3c2c-4428-beed-5114e1548ab3
+ref table LocalDateTable_15fe418a-e567-44a0-add0-3ed75a6af7c0
+ref table LocalDateTable_55154e12-8a97-401e-9771-f8af75a3f146
+ref table LocalDateTable_41e4190b-76e7-49a5-86ba-89ca253e6402
+ref table MART_CASH_FLOW_ANALYSIS
+ref table LocalDateTable_69150415-066d-488e-8e5a-0380c0d921c6
+ref table LocalDateTable_afa5f047-8d1e-4847-8e33-99cc4e8d8390
+ref table LocalDateTable_31b74fcf-a007-40d2-8315-5c23ef7cc09d
+ref table MART_FINANCIAL_ANOMALIES
+ref table LocalDateTable_dccc5701-24bf-473f-8fe9-28dc855fa991
+ref table LocalDateTable_e082657d-0e65-47d1-bf36-57c1fa863f92
+ref table LocalDateTable_5f62ae4e-8eef-4a7a-b584-637c873f3ae6
+ref table LocalDateTable_42a27f90-9b9d-4a36-be76-050486a75e3a
+ref table MART_FINANCIAL_RISK_INDICATORS
+ref table LocalDateTable_59ba268e-57fc-4111-bcae-6534b2fadba8
+ref table LocalDateTable_2572616d-9492-4727-8a89-7feb3b0040b8
+ref table LocalDateTable_ab172c46-ee5e-401e-8343-08448ab0c4e9
+ref table MART_PIPELINE_RUN_MONITORING
+ref table LocalDateTable_d818b436-82bf-4952-ac04-5d981ac0fe05
+ref table LocalDateTable_8a28e839-c4f4-4f21-ba3c-0778d3885b02
+ref table LocalDateTable_14e77bd6-1288-4333-b37b-18ff0bd6373d
+
+ref cultureInfo en-IN
+

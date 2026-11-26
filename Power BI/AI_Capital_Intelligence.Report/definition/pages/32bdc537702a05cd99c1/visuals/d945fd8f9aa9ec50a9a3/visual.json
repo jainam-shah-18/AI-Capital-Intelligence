@@ -1,0 +1,199 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "d945fd8f9aa9ec50a9a3",
+  "position": {
+    "x": 540,
+    "y": 482,
+    "z": 60000,
+    "height": 218,
+    "width": 388,
+    "tabOrder": 60000
+  },
+  "visual": {
+    "visualType": "areaChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_CASH_FLOW_ANALYSIS"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Year"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.PERIOD_END.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "PERIOD_END Year",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_CASH_FLOW_ANALYSIS"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Quarter"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.PERIOD_END.Variation.Date Hierarchy.Quarter",
+              "nativeQueryRef": "PERIOD_END Quarter",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_CASH_FLOW_ANALYSIS"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Month"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.PERIOD_END.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "PERIOD_END Month",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_CASH_FLOW_ANALYSIS"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Day"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.PERIOD_END.Variation.Date Hierarchy.Day",
+              "nativeQueryRef": "PERIOD_END Day",
+              "active": false
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_CASH_FLOW_ANALYSIS"
+                    }
+                  },
+                  "Property": "COMPANY_NAME"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.COMPANY_NAME",
+              "nativeQueryRef": "COMPANY_NAME"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_CASH_FLOW_ANALYSIS"
+                    }
+                  },
+                  "Property": "Total Operating Cash Flow"
+                }
+              },
+              "queryRef": "MART_CASH_FLOW_ANALYSIS.Total Operating Cash Flow",
+              "nativeQueryRef": "Total Operating Cash Flow"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000000000D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

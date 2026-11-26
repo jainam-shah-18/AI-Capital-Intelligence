@@ -1,0 +1,100 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "ce2bac7a8ff4aa998762",
+  "position": {
+    "x": 196.22707248027606,
+    "y": 535.16474312802563,
+    "z": 75000,
+    "height": 89.194123854670934,
+    "width": 181.13268228948559,
+    "tabOrder": 75000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_PIPELINE_RUN_MONITORING"
+                    }
+                  },
+                  "Property": "Latest Rows Loaded"
+                }
+              },
+              "queryRef": "MART_PIPELINE_RUN_MONITORING.Latest Rows Loaded",
+              "nativeQueryRef": "Latest Rows Loaded"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_PIPELINE_RUN_MONITORING"
+                  }
+                },
+                "Property": "Latest Rows Loaded"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": -0.25
+                    }
+                  }
+                }
+              }
+            },
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MART_PIPELINE_RUN_MONITORING.Latest Rows Loaded"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

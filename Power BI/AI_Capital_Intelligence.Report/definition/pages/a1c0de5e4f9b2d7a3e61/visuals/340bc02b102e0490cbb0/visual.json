@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "340bc02b102e0490cbb0",
+  "position": {
+    "x": 461,
+    "y": 148,
+    "z": 59000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 59000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Net Income"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Latest Period Net Income",
+              "nativeQueryRef": "Net Income"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_COMPANY_PERFORMANCE"
+                  }
+                },
+                "Property": "Net Income"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MART_COMPANY_PERFORMANCE.Latest Period Net Income"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

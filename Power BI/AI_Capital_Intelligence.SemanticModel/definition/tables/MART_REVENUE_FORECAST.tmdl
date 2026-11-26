@@ -1,0 +1,293 @@
+table MART_REVENUE_FORECAST
+	lineageTag: d73ffa97-2928-4bd8-85e7-6f7177f6adb8
+
+	measure 'Forecast Revenue' =
+			
+			CALCULATE(
+			    SUM(MART_REVENUE_FORECAST[FORECAST_REVENUE]),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "FORECAST"
+			)
+		lineageTag: d10fb308-372e-4126-bad6-84d4c3e71d98
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Actual Revenue' =
+			
+			CALCULATE(
+			    SUM(MART_REVENUE_FORECAST[ACTUAL_REVENUE]),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "BACKTEST"
+			)
+		lineageTag: 43602b14-a649-4972-88e0-6cb48242bf49
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast Error' =
+			
+			CALCULATE(
+			    AVERAGE(MART_REVENUE_FORECAST[FORECAST_ERROR]),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "BACKTEST"
+			)
+		lineageTag: aa76fa08-60c9-41a7-977a-ed509131ab3c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Absolute Forecast Error' =
+			
+			CALCULATE(
+			    AVERAGE(MART_REVENUE_FORECAST[ABSOLUTE_ERROR]),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "BACKTEST"
+			)
+		lineageTag: e4823bff-1fc2-4887-bbf9-11ab753f7b82
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MAPE %' =
+			
+			CALCULATE(
+			    AVERAGE(MART_REVENUE_FORECAST[ABSOLUTE_PERCENTAGE_ERROR]),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "BACKTEST"
+			)
+		lineageTag: b8eae7e1-5ec1-4573-82bf-3070cf191255
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast Accuracy %' =
+			
+			DIVIDE(100 - [MAPE %], 100)
+		lineageTag: 434ccb41-ff24-4f35-9893-8fdca348c1b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast Revenue Row Count' =
+			
+			CALCULATE(
+			    COUNTROWS(MART_REVENUE_FORECAST),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "FORECAST"
+			)
+		formatString: 0
+		lineageTag: 35e8afa5-f072-47a2-8ea8-4024077929d8
+
+	measure 'Total Forecast Rows' =
+			
+			COUNTROWS(MART_REVENUE_FORECAST)
+		formatString: 0
+		lineageTag: 74f10247-57dc-461c-aa93-d846cc98627f
+
+	measure 'Backtest Rows' =
+			
+			CALCULATE(
+			    COUNTROWS(MART_REVENUE_FORECAST),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "BACKTEST"
+			)
+		formatString: 0
+		lineageTag: 4c1fb960-f5e4-4024-a0f6-14b0a89aa941
+
+	measure 'Forecast Rows' =
+			
+			CALCULATE(
+			    COUNTROWS(MART_REVENUE_FORECAST),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "FORECAST"
+			)
+		formatString: 0
+		lineageTag: d34def8f-2936-4453-8fb7-2b09445eb9f9
+
+	measure 'Forecast Revenue Nonblank Rows' =
+			
+			CALCULATE(
+			    COUNT(MART_REVENUE_FORECAST[FORECAST_REVENUE]),
+			    MART_REVENUE_FORECAST[FORECAST_RECORD_TYPE] = "FORECAST"
+			)
+		formatString: 0
+		lineageTag: a378538f-0766-48fa-aa38-7a4b9a5dda9d
+
+	column COMPANY_CIK
+		dataType: string
+		lineageTag: 79ea5299-3a35-4712-878a-90b945ecf6dc
+		summarizeBy: none
+		sourceColumn: COMPANY_CIK
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_NAME
+		dataType: string
+		lineageTag: e68cec7a-8495-423d-a76d-53873ffec524
+		summarizeBy: none
+		sourceColumn: COMPANY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_CALENDAR_TYPE
+		dataType: string
+		lineageTag: 986bb689-3d1f-4913-9c58-bc46747181f7
+		summarizeBy: none
+		sourceColumn: FISCAL_CALENDAR_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FORECAST_RECORD_TYPE
+		dataType: string
+		lineageTag: b504fd67-ef97-4a85-a7cd-e3f7c00ca8ea
+		summarizeBy: none
+		sourceColumn: FORECAST_RECORD_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TARGET_FISCAL_YEAR
+		dataType: double
+		lineageTag: ce9beb91-3475-482b-b328-b61ec736acf1
+		summarizeBy: sum
+		sourceColumn: TARGET_FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TARGET_FISCAL_QUARTER
+		dataType: string
+		lineageTag: 0ec7df9d-aea7-4222-85d4-74a8abadc5aa
+		summarizeBy: none
+		sourceColumn: TARGET_FISCAL_QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column TARGET_PERIOD_START
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 282308f0-1335-4880-a974-fd0238f5d415
+		summarizeBy: none
+		sourceColumn: TARGET_PERIOD_START
+
+		variation Variation
+			isDefault
+			relationship: 29ee69b4-f4f1-4c74-be86-b2415c963917
+			defaultHierarchy: LocalDateTable_a7622121-d230-46ac-812f-e7f82090c632.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TARGET_PERIOD_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d36ce6b2-01d6-4334-93e3-1d807b522f4e
+		summarizeBy: none
+		sourceColumn: TARGET_PERIOD_END
+
+		variation Variation
+			isDefault
+			relationship: 4612f740-ec49-4033-b4db-7f5a390c9753
+			defaultHierarchy: LocalDateTable_89e5546d-3c2c-4428-beed-5114e1548ab3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ACTUAL_PERIOD_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4ddd53fe-e6fa-49a6-a1ce-b135b6a0b1ce
+		summarizeBy: none
+		sourceColumn: ACTUAL_PERIOD_END
+
+		variation Variation
+			isDefault
+			relationship: 8e7e4d1d-b0be-4e47-88dc-7cd19b0b5ac5
+			defaultHierarchy: LocalDateTable_15fe418a-e567-44a0-add0-3ed75a6af7c0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FORECAST_SOURCE_PERIOD_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cd007359-3dd6-4b86-9fe3-39e49bba54a9
+		summarizeBy: none
+		sourceColumn: FORECAST_SOURCE_PERIOD_END
+
+		variation Variation
+			isDefault
+			relationship: 46e5fc6a-7fd6-43ad-bf02-6ab7c409dc14
+			defaultHierarchy: LocalDateTable_55154e12-8a97-401e-9771-f8af75a3f146.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ACTUAL_REVENUE
+		dataType: double
+		lineageTag: a11d55c4-6fca-4eb3-a928-26623aaa7956
+		summarizeBy: sum
+		sourceColumn: ACTUAL_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FORECAST_REVENUE
+		dataType: double
+		lineageTag: e898acbc-b806-4c99-bdc1-c33c5289d293
+		summarizeBy: sum
+		sourceColumn: FORECAST_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FORECAST_ERROR
+		dataType: double
+		lineageTag: 5e345cd6-cae7-4732-bc0b-fc709970441b
+		summarizeBy: sum
+		sourceColumn: FORECAST_ERROR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ABSOLUTE_ERROR
+		dataType: double
+		lineageTag: cbb2256c-ab08-4120-8759-165b1fc56cc6
+		summarizeBy: sum
+		sourceColumn: ABSOLUTE_ERROR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ABSOLUTE_PERCENTAGE_ERROR
+		dataType: double
+		lineageTag: ff690d78-efe9-461b-848b-fad3e6feeeac
+		summarizeBy: sum
+		sourceColumn: ABSOLUTE_PERCENTAGE_ERROR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MODEL_CREATED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 604e2c91-f0ac-4910-88a7-332fa0e5f4de
+		summarizeBy: none
+		sourceColumn: MODEL_CREATED_AT
+
+		variation Variation
+			isDefault
+			relationship: 1ec09efb-b5b5-4898-9c96-b2ef5a11812e
+			defaultHierarchy: LocalDateTable_41e4190b-76e7-49a5-86ba-89ca253e6402.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MART_REVENUE_FORECAST = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("jsnwncr-ei63147.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    ACI_DB_Database = Source{[Name="ACI_DB",Kind="Database"]}[Data],
+				    DBT_DEV_Schema = ACI_DB_Database{[Name="DBT_DEV",Kind="Schema"]}[Data],
+				    MART_REVENUE_FORECAST_Table = DBT_DEV_Schema{[Name="MART_REVENUE_FORECAST",Kind="Table"]}[Data]
+				in
+				    MART_REVENUE_FORECAST_Table
+
+	annotation PBI_ResultType = Table
+

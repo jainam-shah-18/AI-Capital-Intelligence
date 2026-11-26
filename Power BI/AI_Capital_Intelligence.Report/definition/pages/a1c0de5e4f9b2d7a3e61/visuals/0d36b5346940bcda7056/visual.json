@@ -1,0 +1,119 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "0d36b5346940bcda7056",
+  "position": {
+    "x": 540,
+    "y": 482,
+    "z": 57000,
+    "height": 218,
+    "width": 388,
+    "tabOrder": 57000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "COMPANY_NAME"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.COMPANY_NAME",
+              "nativeQueryRef": "COMPANY_NAME",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MART_COMPANY_PERFORMANCE"
+                        }
+                      },
+                      "Property": "REVENUE_QOQ_GROWTH_PCT"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(MART_COMPANY_PERFORMANCE.REVENUE_QOQ_GROWTH_PCT)",
+              "nativeQueryRef": "Sum of REVENUE_QOQ_GROWTH_PCT"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MART_COMPANY_PERFORMANCE"
+                        }
+                      },
+                      "Property": "OPERATING_INCOME"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(MART_COMPANY_PERFORMANCE.OPERATING_INCOME)",
+              "nativeQueryRef": "Sum of OPERATING_INCOME"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MART_COMPANY_PERFORMANCE"
+                        }
+                      },
+                      "Property": "OPERATING_MARGIN_PCT"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(MART_COMPANY_PERFORMANCE.OPERATING_MARGIN_PCT)",
+              "nativeQueryRef": "Sum of OPERATING_MARGIN_PCT"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MART_COMPANY_PERFORMANCE"
+                        }
+                      },
+                      "Property": "NET_INCOME"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(MART_COMPANY_PERFORMANCE.NET_INCOME)",
+              "nativeQueryRef": "Sum of NET_INCOME"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

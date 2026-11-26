@@ -1,0 +1,375 @@
+table MART_COMPANY_COMPARISON
+	lineageTag: 83f12f40-7556-41fd-afa0-3ecbe9103c90
+
+	measure 'Revenue Latest Quarter' =
+			
+			VAR LatestPeriod =
+			    CALCULATE (
+			        MAX ( MART_COMPANY_COMPARISON[PERIOD_END] ),
+			        REMOVEFILTERS ( MART_COMPANY_COMPARISON[PERIOD_END] )
+			    )
+			RETURN
+			    CALCULATE (
+			        SUM ( MART_COMPANY_COMPARISON[REVENUE] ),
+			        MART_COMPANY_COMPARISON[PERIOD_END] = LatestPeriod
+			    )
+		lineageTag: d8eb76b4-a700-44c7-aec9-ce16788fbec4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Operating Income Latest Quarter' =
+			
+			VAR LatestPeriod =
+			    CALCULATE (
+			        MAX ( MART_COMPANY_COMPARISON[PERIOD_END] ),
+			        REMOVEFILTERS ( MART_COMPANY_COMPARISON[PERIOD_END] )
+			    )
+			RETURN
+			    CALCULATE (
+			        SUM ( MART_COMPANY_COMPARISON[OPERATING_INCOME] ),
+			        MART_COMPANY_COMPARISON[PERIOD_END] = LatestPeriod
+			    )
+		lineageTag: 0eacf5f3-b06a-4fa9-8bc8-ddbab771c8da
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Income Latest Quarter' =
+			
+			VAR LatestPeriod =
+			    CALCULATE (
+			        MAX ( MART_COMPANY_COMPARISON[PERIOD_END] ),
+			        REMOVEFILTERS ( MART_COMPANY_COMPARISON[PERIOD_END] )
+			    )
+			RETURN
+			    CALCULATE (
+			        SUM ( MART_COMPANY_COMPARISON[NET_INCOME] ),
+			        MART_COMPANY_COMPARISON[PERIOD_END] = LatestPeriod
+			    )
+		lineageTag: ae9eea2b-c9b3-42b8-b83b-7be8e63e8dfc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Operating Margin Latest Quarter' =
+			
+			DIVIDE (
+			    [Operating Income Latest Quarter],
+			    [Revenue Latest Quarter]
+			)
+		lineageTag: 25934f07-5d39-43af-bf82-50087a982073
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPANY_CIK
+		dataType: string
+		lineageTag: 4dc84d8a-0bc6-47c2-a9b8-db835cc096bf
+		summarizeBy: none
+		sourceColumn: COMPANY_CIK
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_NAME
+		dataType: string
+		lineageTag: f0f63d7d-186b-404e-a087-cb3228c622aa
+		summarizeBy: none
+		sourceColumn: COMPANY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERIOD_START
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e9fe3be7-41c6-4446-b34e-187a6d6c1254
+		summarizeBy: none
+		sourceColumn: PERIOD_START
+
+		variation Variation
+			isDefault
+			relationship: d7b308ba-84f6-4cce-b4c3-9b0982286575
+			defaultHierarchy: LocalDateTable_cfa1a14d-e9f0-496d-ae39-dc2d5ac11bbd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PERIOD_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e2b956db-c2e5-4bfa-9dc0-d70adc0a7afa
+		summarizeBy: none
+		sourceColumn: PERIOD_END
+
+		variation Variation
+			isDefault
+			relationship: 00ed236f-745f-4e25-aaa9-bfe53ca53086
+			defaultHierarchy: LocalDateTable_0a71c876-ba87-429f-952f-fad77a62efc7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CALENDAR_YEAR
+		dataType: double
+		lineageTag: 6532dff2-f9ee-4442-963c-3e217cbf1d04
+		summarizeBy: sum
+		sourceColumn: CALENDAR_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CALENDAR_QUARTER
+		dataType: double
+		lineageTag: 04ff7889-9758-495f-a800-7d743bf465c7
+		summarizeBy: sum
+		sourceColumn: CALENDAR_QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FILING_FISCAL_YEAR
+		dataType: double
+		lineageTag: a11743f7-822a-44c9-a927-8acafb08fdb3
+		summarizeBy: sum
+		sourceColumn: FILING_FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FILING_FISCAL_PERIOD
+		dataType: string
+		lineageTag: 485f8ba8-383b-4553-9535-2f4bf5bb1711
+		summarizeBy: none
+		sourceColumn: FILING_FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column DURATION_CLASS
+		dataType: string
+		lineageTag: b4379dbc-ccb4-488b-89c5-13d45003bf40
+		summarizeBy: none
+		sourceColumn: DURATION_CLASS
+
+		annotation SummarizationSetBy = Automatic
+
+	column REVENUE
+		dataType: double
+		lineageTag: 4b8c2bcc-6f2e-425c-9acf-93988091f529
+		summarizeBy: none
+		sourceColumn: REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_INCOME
+		dataType: double
+		lineageTag: 3857f91f-0bbd-4166-8c40-66fced7af293
+		summarizeBy: sum
+		sourceColumn: OPERATING_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_INCOME
+		dataType: double
+		lineageTag: c3de1095-ea5f-43a6-b956-cce3493836f6
+		summarizeBy: sum
+		sourceColumn: NET_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_MARGIN_PCT
+		dataType: double
+		lineageTag: 3d52baef-57d0-4780-91c0-4dc9290e5f78
+		summarizeBy: sum
+		sourceColumn: OPERATING_MARGIN_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_PROFIT_MARGIN_PCT
+		dataType: double
+		lineageTag: 1a686a13-8945-4d1b-b469-276d6398a115
+		summarizeBy: sum
+		sourceColumn: NET_PROFIT_MARGIN_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_YOY_GROWTH_PCT
+		dataType: double
+		lineageTag: 29026e6c-ee75-4452-872c-2a7ef7b0829b
+		summarizeBy: sum
+		sourceColumn: REVENUE_YOY_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PEER_AVG_REVENUE
+		dataType: double
+		lineageTag: 76c0eda2-029c-4b95-83e4-c7c942e79e1f
+		summarizeBy: sum
+		sourceColumn: PEER_AVG_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PEER_AVG_OPERATING_INCOME
+		dataType: double
+		lineageTag: 9b546d20-6241-4759-9585-43beea24444e
+		summarizeBy: sum
+		sourceColumn: PEER_AVG_OPERATING_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PEER_AVG_NET_INCOME
+		dataType: double
+		lineageTag: 34d50d4a-0a59-4d77-a5ab-4674f4e541f7
+		summarizeBy: sum
+		sourceColumn: PEER_AVG_NET_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PEER_AVG_OPERATING_MARGIN_PCT
+		dataType: double
+		lineageTag: 364e8db7-eff6-4793-a232-fc6f0aecfd3c
+		summarizeBy: sum
+		sourceColumn: PEER_AVG_OPERATING_MARGIN_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PEER_AVG_NET_PROFIT_MARGIN_PCT
+		dataType: double
+		lineageTag: 6b4b8100-e397-4a02-9aaf-dbe59dbdaa20
+		summarizeBy: sum
+		sourceColumn: PEER_AVG_NET_PROFIT_MARGIN_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PEER_TOTAL_REVENUE
+		dataType: double
+		lineageTag: b72036a8-44c9-4d97-bfc6-6717b7da0cd2
+		summarizeBy: sum
+		sourceColumn: PEER_TOTAL_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_SHARE_PCT
+		dataType: double
+		lineageTag: 595ee3dc-f482-4190-82a3-cea93b1b159a
+		summarizeBy: sum
+		sourceColumn: REVENUE_SHARE_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_RANK
+		dataType: double
+		lineageTag: 2668fd0f-26f6-478b-a78d-aaa47ae9b608
+		summarizeBy: sum
+		sourceColumn: REVENUE_RANK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_INCOME_RANK
+		dataType: double
+		lineageTag: a685fc1d-9117-4038-8f89-57104b31c5f5
+		summarizeBy: sum
+		sourceColumn: OPERATING_INCOME_RANK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_INCOME_RANK
+		dataType: double
+		lineageTag: a45d42f3-5bc1-4ed8-bcc4-edeb1879d4f2
+		summarizeBy: sum
+		sourceColumn: NET_INCOME_RANK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_MARGIN_RANK
+		dataType: double
+		lineageTag: 6cc78713-6333-42fa-bf6e-b68354cb9fe3
+		summarizeBy: sum
+		sourceColumn: OPERATING_MARGIN_RANK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_PROFIT_MARGIN_RANK
+		dataType: double
+		lineageTag: a48046d6-c02b-4aca-be19-4e81806c0137
+		summarizeBy: sum
+		sourceColumn: NET_PROFIT_MARGIN_RANK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPARISON_COMPANY_COUNT
+		dataType: double
+		lineageTag: 95fe6267-5632-4a6e-9d1c-017ddff76110
+		summarizeBy: sum
+		sourceColumn: COMPARISON_COMPANY_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MART_CREATED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e99b81a1-d2e0-471b-9d60-eb413200e2e5
+		summarizeBy: none
+		sourceColumn: MART_CREATED_AT
+
+		variation Variation
+			isDefault
+			relationship: 1b828429-260b-4673-b914-5032f234ce0e
+			defaultHierarchy: LocalDateTable_1b48b32a-bd8e-4aaa-9118-5dc6bbfe441c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MART_COMPANY_COMPARISON = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("jsnwncr-ei63147.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    ACI_DB_Database = Source{[Name="ACI_DB",Kind="Database"]}[Data],
+				    DBT_DEV_Schema = ACI_DB_Database{[Name="DBT_DEV",Kind="Schema"]}[Data],
+				    MART_COMPANY_COMPARISON_Table = DBT_DEV_Schema{[Name="MART_COMPANY_COMPARISON",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(MART_COMPANY_COMPARISON_Table,{"REVENUE_GROWTH_RANK"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

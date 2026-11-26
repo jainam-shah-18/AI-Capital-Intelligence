@@ -1,0 +1,189 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportExtension/1.0.0/schema.json",
+  "name": "extension",
+  "entities": [
+    {
+      "name": "MART_COMPANY_PERFORMANCE",
+      "measures": [
+        {
+          "name": "Revenue PY",
+          "dataType": "Double",
+          "expression": "VAR d = [Latest Reporting Period]\nRETURN CALCULATE ( SUM ( MART_COMPANY_PERFORMANCE[REVENUE] ), MART_COMPANY_PERFORMANCE[PERIOD_END] = EOMONTH ( d, -12 ) )",
+          "formatString": "#,0"
+        },
+        {
+          "name": "Net Income PY",
+          "dataType": "Double",
+          "expression": "VAR d = [Latest Reporting Period]\nRETURN CALCULATE ( SUM ( MART_COMPANY_PERFORMANCE[NET_INCOME] ), MART_COMPANY_PERFORMANCE[PERIOD_END] = EOMONTH ( d, -12 ) )",
+          "formatString": "#,0"
+        },
+        {
+          "name": "Operating Income PY",
+          "dataType": "Double",
+          "expression": "VAR d = [Latest Reporting Period]\nRETURN CALCULATE ( SUM ( MART_COMPANY_PERFORMANCE[OPERATING_INCOME] ), MART_COMPANY_PERFORMANCE[PERIOD_END] = EOMONTH ( d, -12 ) )",
+          "formatString": "#,0"
+        },
+        {
+          "name": "Operating Margin PY",
+          "dataType": "Double",
+          "expression": "DIVIDE ( [Operating Income PY], [Revenue PY] )",
+          "formatString": "0.00%"
+        },
+        {
+          "name": "Revenue YoY %",
+          "dataType": "Double",
+          "expression": "DIVIDE ( [Latest Period Revenue] - [Revenue PY], [Revenue PY] )",
+          "formatString": "0.00%"
+        },
+        {
+          "name": "Net Income YoY %",
+          "dataType": "Double",
+          "expression": "DIVIDE ( [Latest Period Net Income] - [Net Income PY], [Net Income PY] )",
+          "formatString": "0.00%"
+        },
+        {
+          "name": "Operating Income YoY %",
+          "dataType": "Double",
+          "expression": "DIVIDE ( [Latest Period Operating Income] - [Operating Income PY], [Operating Income PY] )",
+          "formatString": "0.00%"
+        },
+        {
+          "name": "Operating Margin YoY pp",
+          "dataType": "Double",
+          "expression": "VAR p = [Operating Margin PY]\nRETURN IF ( ISBLANK ( p ), BLANK (), [Latest Operating Margin] - p )",
+          "formatString": "0.00%"
+        },
+        {
+          "name": "Operating Cash Flow Latest",
+          "dataType": "Double",
+          "expression": "CALCULATE ( SUM ( MART_COMPANY_PERFORMANCE[OPERATING_CASH_FLOW] ), MART_COMPANY_PERFORMANCE[PERIOD_END] = [Latest Reporting Period] )",
+          "formatString": "#,0"
+        },
+        {
+          "name": "KPI Revenue Text",
+          "dataType": "Text",
+          "expression": "IF ( ISBLANK ( [Latest Period Revenue] ), \"–\", \"$\" & FORMAT ( [Latest Period Revenue] / 1000000000, \"#,##0.00\" ) & \"B\" )"
+        },
+        {
+          "name": "KPI Net Income Text",
+          "dataType": "Text",
+          "expression": "IF ( ISBLANK ( [Latest Period Net Income] ), \"–\", \"$\" & FORMAT ( [Latest Period Net Income] / 1000000000, \"#,##0.00\" ) & \"B\" )"
+        },
+        {
+          "name": "KPI Operating Income Text",
+          "dataType": "Text",
+          "expression": "IF ( ISBLANK ( [Latest Period Operating Income] ), \"–\", \"$\" & FORMAT ( [Latest Period Operating Income] / 1000000000, \"#,##0.00\" ) & \"B\" )"
+        },
+        {
+          "name": "KPI Operating Margin Text",
+          "dataType": "Text",
+          "expression": "IF ( ISBLANK ( [Latest Operating Margin] ), \"–\", FORMAT ( [Latest Operating Margin], \"0.00%\" ) )"
+        },
+        {
+          "name": "KPI OCF Text",
+          "dataType": "Text",
+          "expression": "IF ( ISBLANK ( [Operating Cash Flow Latest] ), \"–\", \"$\" & FORMAT ( [Operating Cash Flow Latest] / 1000000000, \"#,##0.0\" ) & \"B\" )"
+        },
+        {
+          "name": "KPI Revenue YoY Text",
+          "dataType": "Text",
+          "expression": "IF ( ISBLANK ( [Revenue YoY %] ), \"–\", FORMAT ( [Revenue YoY %], \"0.00%\" ) )"
+        },
+        {
+          "name": "KPI Net Income YoY Text",
+          "dataType": "Text",
+          "expression": "IF ( ISBLANK ( [Net Income YoY %] ), \"–\", FORMAT ( [Net Income YoY %], \"0.00%\" ) )"
+        },
+        {
+          "name": "Revenue YoY Label",
+          "dataType": "Text",
+          "expression": "VAR x = [Revenue YoY %]\nRETURN IF ( ISBLANK ( x ), \"–\", IF ( x >= 0, \"▲ +\", \"▼ \" ) & FORMAT ( x, \"0.00%\" ) & \" YoY\" )"
+        },
+        {
+          "name": "Net Income YoY Label",
+          "dataType": "Text",
+          "expression": "VAR x = [Net Income YoY %]\nRETURN IF ( ISBLANK ( x ), \"–\", IF ( x >= 0, \"▲ +\", \"▼ \" ) & FORMAT ( x, \"0.00%\" ) & \" YoY\" )"
+        },
+        {
+          "name": "Operating Income YoY Label",
+          "dataType": "Text",
+          "expression": "VAR x = [Operating Income YoY %]\nRETURN IF ( ISBLANK ( x ), \"–\", IF ( x >= 0, \"▲ +\", \"▼ \" ) & FORMAT ( x, \"0.00%\" ) & \" YoY\" )"
+        },
+        {
+          "name": "Operating Margin YoY Label",
+          "dataType": "Text",
+          "expression": "VAR x = [Operating Margin YoY pp]\nRETURN IF ( ISBLANK ( x ), \"–\", IF ( x >= 0, \"▲ +\", \"▼ \" ) & FORMAT ( x * 100, \"0.00\" ) & \" pp YoY\" )"
+        },
+        {
+          "name": "Revenue YoY Color",
+          "dataType": "Text",
+          "expression": "IF ( [Revenue YoY %] >= 0, \"#16A34A\", \"#DC2626\" )"
+        },
+        {
+          "name": "Net Income YoY Color",
+          "dataType": "Text",
+          "expression": "IF ( [Net Income YoY %] >= 0, \"#16A34A\", \"#DC2626\" )"
+        },
+        {
+          "name": "Operating Income YoY Color",
+          "dataType": "Text",
+          "expression": "IF ( [Operating Income YoY %] >= 0, \"#16A34A\", \"#DC2626\" )"
+        },
+        {
+          "name": "Operating Margin YoY Color",
+          "dataType": "Text",
+          "expression": "IF ( [Operating Margin YoY pp] >= 0, \"#16A34A\", \"#DC2626\" )"
+        },
+        {
+          "name": "As Of Text",
+          "dataType": "Text",
+          "expression": "FORMAT ( [Latest Reporting Period], \"yyyy-mm-dd\" )"
+        },
+        {
+          "name": "Insight Revenue",
+          "dataType": "Text",
+          "expression": "VAR d = [Latest Reporting Period]\nVAR q = \"Q\" & ROUNDUP ( MONTH ( d ) / 3, 0 ) & \" \" & YEAR ( d )\nVAR x = [Revenue YoY %]\nRETURN IF ( ISBLANK ( x ), \"–\", \"Revenue \" & IF ( x >= 0, \"grew \", \"fell \" ) & FORMAT ( ABS ( x ), \"0.00%\" ) & \" YoY to $\" & FORMAT ( [Latest Period Revenue] / 1000000000, \"#,##0.00\" ) & \"B (\" & q & \")\" )"
+        },
+        {
+          "name": "Insight Net Income",
+          "dataType": "Text",
+          "expression": "VAR x = [Net Income YoY %]\nRETURN IF ( ISBLANK ( x ), \"–\", \"Net income \" & IF ( x >= 0, \"up \", \"down \" ) & FORMAT ( ABS ( x ), \"0.00%\" ) & \" YoY to $\" & FORMAT ( [Latest Period Net Income] / 1000000000, \"#,##0.00\" ) & \"B\" )"
+        },
+        {
+          "name": "Insight Margin",
+          "dataType": "Text",
+          "expression": "VAR x = [Operating Margin YoY pp]\nRETURN IF ( ISBLANK ( x ), \"Operating margin \" & FORMAT ( [Latest Operating Margin], \"0.00%\" ),\n    \"Operating margin \" & IF ( x >= 0, \"improved\", \"contracted\" ) & \" to \" & FORMAT ( [Latest Operating Margin], \"0.00%\" ) )"
+        },
+        {
+          "name": "Quarter Complete",
+          "dataType": "Boolean",
+          "expression": "DISTINCTCOUNT ( MART_COMPANY_PERFORMANCE[COMPANY_NAME] ) = CALCULATE ( DISTINCTCOUNT ( MART_COMPANY_PERFORMANCE[COMPANY_NAME] ), REMOVEFILTERS ( MART_COMPANY_PERFORMANCE[PERIOD_END] ) )"
+        },
+        {
+          "name": "Trend Revenue",
+          "dataType": "Double",
+          "expression": "IF ( [Quarter Complete], SUM ( MART_COMPANY_PERFORMANCE[REVENUE] ) )",
+          "formatString": "#,0"
+        },
+        {
+          "name": "Trend Net Income",
+          "dataType": "Double",
+          "expression": "IF ( [Quarter Complete], SUM ( MART_COMPANY_PERFORMANCE[NET_INCOME] ) )",
+          "formatString": "#,0"
+        },
+        {
+          "name": "Trend Operating Income",
+          "dataType": "Double",
+          "expression": "IF ( [Quarter Complete], SUM ( MART_COMPANY_PERFORMANCE[OPERATING_INCOME] ) )",
+          "formatString": "#,0"
+        },
+        {
+          "name": "Trend Operating Margin",
+          "dataType": "Double",
+          "expression": "DIVIDE ( [Trend Operating Income], [Trend Revenue] )",
+          "formatString": "0.00%"
+        }
+      ]
+    }
+  ]
+}

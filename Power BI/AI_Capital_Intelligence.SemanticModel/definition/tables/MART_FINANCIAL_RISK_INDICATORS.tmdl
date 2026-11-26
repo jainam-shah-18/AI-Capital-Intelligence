@@ -1,0 +1,324 @@
+table MART_FINANCIAL_RISK_INDICATORS
+	lineageTag: 760720af-05ef-4828-b6d7-8870b57f920c
+
+	measure 'Total Flagged Anomalies' =
+			
+			SUM (
+			    MART_FINANCIAL_RISK_INDICATORS[FLAGGED_ANOMALY_COUNT]
+			)
+		lineageTag: dd4628e2-a75f-4804-8dfa-24f8e6e0ead7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Risk Indicators' =
+			
+			SUM (
+			    MART_FINANCIAL_RISK_INDICATORS[RISK_INDICATOR_COUNT]
+			)
+		lineageTag: bde7079d-4d2f-4b47-90dc-7b6be5eb55ad
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Companies Monitored' =
+			
+			DISTINCTCOUNT (
+			    MART_FINANCIAL_RISK_INDICATORS[COMPANY_NAME]
+			)
+		formatString: 0
+		lineageTag: 3400a134-976f-46d7-8882-8b5031bd7f2a
+
+	column COMPANY_CIK
+		dataType: string
+		lineageTag: 4dc86835-da6f-439a-b071-0ae584c69d60
+		summarizeBy: none
+		sourceColumn: COMPANY_CIK
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_NAME
+		dataType: string
+		lineageTag: dfd45bb6-0770-4e47-9bc6-3bdaf9db52a9
+		summarizeBy: none
+		sourceColumn: COMPANY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT
+		dataType: string
+		lineageTag: 79274d2a-78b2-47e2-8d74-64bd54e67398
+		summarizeBy: none
+		sourceColumn: UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERIOD_START
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c5750c31-57e5-42b1-8f6d-232f0b36e94d
+		summarizeBy: none
+		sourceColumn: PERIOD_START
+
+		variation Variation
+			isDefault
+			relationship: bcd206e8-b8ab-421d-a917-57b47db1987c
+			defaultHierarchy: LocalDateTable_59ba268e-57fc-4111-bcae-6534b2fadba8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PERIOD_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fda4c908-81a6-4533-b501-c17a354830d5
+		summarizeBy: none
+		sourceColumn: PERIOD_END
+
+		variation Variation
+			isDefault
+			relationship: 4ca853e4-c947-4f1b-af38-8c0f1308a294
+			defaultHierarchy: LocalDateTable_2572616d-9492-4727-8a89-7feb3b0040b8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column REVENUE
+		dataType: double
+		lineageTag: 7dfabd5c-68e6-493f-a0c8-a0e4ed233ac9
+		summarizeBy: none
+		sourceColumn: REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRIOR_YEAR_REVENUE
+		dataType: double
+		lineageTag: 3cb31bd8-0834-4e0f-8446-83c423542cf8
+		summarizeBy: sum
+		sourceColumn: PRIOR_YEAR_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_YOY_GROWTH_PCT
+		dataType: double
+		lineageTag: dd7bbda8-7d68-4d79-98a7-9964dc744b5a
+		summarizeBy: sum
+		sourceColumn: REVENUE_YOY_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_INCOME
+		dataType: double
+		lineageTag: e90cb320-b047-4622-a885-e4663df67abd
+		summarizeBy: sum
+		sourceColumn: OPERATING_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_MARGIN
+		dataType: double
+		lineageTag: 1e605f37-b8b0-4fdf-b86e-7697d042331e
+		summarizeBy: sum
+		sourceColumn: OPERATING_MARGIN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRIOR_YEAR_OPERATING_MARGIN
+		dataType: double
+		lineageTag: 4e96df5e-ccf5-479d-a35a-adccb8ca45f4
+		summarizeBy: sum
+		sourceColumn: PRIOR_YEAR_OPERATING_MARGIN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_MARGIN_CHANGE_PP
+		dataType: double
+		lineageTag: f5c8adfc-6817-4515-b80a-d517513ae553
+		summarizeBy: sum
+		sourceColumn: OPERATING_MARGIN_CHANGE_PP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_INCOME_YOY_GROWTH_PCT
+		dataType: double
+		lineageTag: 4c949779-46d8-4c04-8ad1-741585a95236
+		summarizeBy: sum
+		sourceColumn: OPERATING_INCOME_YOY_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_INCOME
+		dataType: double
+		lineageTag: 94f59c3d-8b6d-439d-911e-c1b41dd020c2
+		summarizeBy: sum
+		sourceColumn: NET_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRIOR_YEAR_NET_INCOME
+		dataType: double
+		lineageTag: 44757f2f-8a36-4f28-8fc2-0a0fb0ca74c5
+		summarizeBy: sum
+		sourceColumn: PRIOR_YEAR_NET_INCOME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_INCOME_YOY_GROWTH_PCT
+		dataType: double
+		lineageTag: b3dab699-4915-496b-b7cb-4ee6c36897a9
+		summarizeBy: sum
+		sourceColumn: NET_INCOME_YOY_GROWTH_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_CONCEPT_COUNT
+		dataType: double
+		lineageTag: 1ff26e21-ea95-4278-a126-40fa847a4c5b
+		summarizeBy: sum
+		sourceColumn: REVENUE_CONCEPT_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_INCOME_CONCEPT_COUNT
+		dataType: double
+		lineageTag: 5de6131b-4795-485d-a9bf-99ac6e8f1a27
+		summarizeBy: sum
+		sourceColumn: OPERATING_INCOME_CONCEPT_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_INCOME_CONCEPT_COUNT
+		dataType: double
+		lineageTag: 661556ee-2e0a-454e-a159-96ef4f48d68e
+		summarizeBy: sum
+		sourceColumn: NET_INCOME_CONCEPT_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ANOMALY_OBSERVATION_COUNT
+		dataType: double
+		lineageTag: 86fd9d1b-4fcb-46a4-bb2b-c37ec1f1a2f0
+		summarizeBy: sum
+		sourceColumn: ANOMALY_OBSERVATION_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FLAGGED_ANOMALY_COUNT
+		dataType: double
+		lineageTag: f6175e42-4f4d-4074-914e-29f610b86d16
+		summarizeBy: sum
+		sourceColumn: FLAGGED_ANOMALY_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVENUE_GROWTH_DECLINE_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bcfdd13c-025c-4525-9cf3-0658794149c0
+		summarizeBy: none
+		sourceColumn: REVENUE_GROWTH_DECLINE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPERATING_MARGIN_CONTRACTION_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 673eeec9-e1ea-4cb4-8c29-27f381d0f15a
+		summarizeBy: none
+		sourceColumn: OPERATING_MARGIN_CONTRACTION_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column NET_INCOME_GROWTH_DECLINE_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fafbb1bc-eb6f-41c9-ae04-60b408b2a910
+		summarizeBy: none
+		sourceColumn: NET_INCOME_GROWTH_DECLINE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column FINANCIAL_ANOMALY_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 74d07c03-6972-437b-85a3-0eb22fc6180b
+		summarizeBy: none
+		sourceColumn: FINANCIAL_ANOMALY_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column RISK_INDICATOR_COUNT
+		dataType: double
+		lineageTag: c28475ca-f69c-4471-93df-c6a00a8806b3
+		summarizeBy: sum
+		sourceColumn: RISK_INDICATOR_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MONITORING_STATUS
+		dataType: string
+		lineageTag: 9bdfe4ae-fefa-4ffb-bdb2-4c9f14d84a1d
+		summarizeBy: none
+		sourceColumn: MONITORING_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column MODEL_CREATED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db0ce348-504e-47f0-b436-783599153539
+		summarizeBy: none
+		sourceColumn: MODEL_CREATED_AT
+
+		variation Variation
+			isDefault
+			relationship: 2c9c5894-1a4d-4b6f-a91c-f026d91a9613
+			defaultHierarchy: LocalDateTable_ab172c46-ee5e-401e-8343-08448ab0c4e9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MART_FINANCIAL_RISK_INDICATORS = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("jsnwncr-ei63147.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    ACI_DB_Database = Source{[Name="ACI_DB",Kind="Database"]}[Data],
+				    DBT_DEV_Schema = ACI_DB_Database{[Name="DBT_DEV",Kind="Schema"]}[Data],
+				    MART_FINANCIAL_RISK_INDICATORS_View = DBT_DEV_Schema{[Name="MART_FINANCIAL_RISK_INDICATORS",Kind="View"]}[Data]
+				in
+				    MART_FINANCIAL_RISK_INDICATORS_View
+

@@ -1,4 +1,4 @@
-﻿# AI Capital Intelligence
+# AI Capital Intelligence
 
 An end-to-end financial intelligence platform that transforms SEC filings into governed financial analytics, company comparisons, anomaly detection, revenue forecasts, and AI-assisted explanations.
 
@@ -39,10 +39,10 @@ The latest pipeline execution extracted and loaded 4,529 observations across the
 
 ## dbt Analytics
 
-- 18 dbt models
+- 20 dbt models
 - 2 seeds
-- 1 source
-- 61 data tests
+- 2 sources
+- 72 data tests
 
 Capabilities include canonical metric selection, filing evidence validation, quarterly period alignment, cash-flow derivation, company comparison, revenue forecasting, anomaly detection, and financial risk indicators.
 
@@ -101,9 +101,9 @@ The DAG is registered, unpaused, and its manual execution has succeeded. dbt run
 
 ## Validation Results
 
-- Python tests: 38 passed
-- dbt models: 18 built successfully
-- dbt tests: 61 passed, 0 warnings, 0 errors
+- Python tests: 41 passed
+- dbt models: 20 built successfully
+- dbt tests: 72 passed, 0 warnings, 0 errors
 - Python compilation: passed
 - Dependency check: no broken requirements
 - Ollama inference: passed

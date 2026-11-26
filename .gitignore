@@ -58,3 +58,21 @@ ACI_02_2026-11-08-1152.csv
 
 # Generated AI vector store
 data/vector_store/
+
+# Power BI local machine settings
+**/.pbi/
+
+# Local pre-fix backup
+AI_Capital_Intelligence_before_fixes.pbix
+
+# Power BI local machine settings
+**/.pbi/
+
+# Local pre-fix backup
+AI_Capital_Intelligence_before_fixes.pbix
+
+# Power BI local cache and user-specific settings
+**/.pbi/
+
+# Power BI working backup
+Power BI/AI_Capital_Intelligence_WORKING_BACKUP.pbix

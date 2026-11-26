@@ -1,0 +1,100 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "4e1d1402209837782370",
+  "position": {
+    "x": 540,
+    "y": 482,
+    "z": 60000,
+    "height": 218,
+    "width": 388,
+    "tabOrder": 60000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                    }
+                  },
+                  "Property": "COMPANY_NAME"
+                }
+              },
+              "queryRef": "MART_FINANCIAL_RISK_INDICATORS.COMPANY_NAME",
+              "nativeQueryRef": "COMPANY_NAME",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                        }
+                      },
+                      "Property": "FLAGGED_ANOMALY_COUNT"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(MART_FINANCIAL_RISK_INDICATORS.FLAGGED_ANOMALY_COUNT)",
+              "nativeQueryRef": "Sum of FLAGGED_ANOMALY_COUNT"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                      }
+                    },
+                    "Property": "FLAGGED_ANOMALY_COUNT"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

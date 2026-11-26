@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "dyna70e40008f0d4a6c8366",
+  "position": {
+    "x": 179.76046499941373,
+    "y": 120.75512152632373,
+    "z": 52000,
+    "height": 63.121995343305585,
+    "width": 253.8601986632942,
+    "tabOrder": 52000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Financial Records"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Financial Records",
+              "nativeQueryRef": "Financial Records",
+              "format": "0"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MART_COMPANY_PERFORMANCE.Financial Records"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3abc1c35951032f7e783",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MART_COMPANY_PERFORMANCE"
+              }
+            },
+            "Property": "Financial Records"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

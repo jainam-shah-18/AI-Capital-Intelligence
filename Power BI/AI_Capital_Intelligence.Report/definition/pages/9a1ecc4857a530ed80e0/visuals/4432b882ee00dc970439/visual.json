@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "4432b882ee00dc970439",
+  "position": {
+    "x": 461,
+    "y": 148,
+    "z": 62000,
+    "height": 54,
+    "width": 245,
+    "tabOrder": 62000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_COMPARISON"
+                    }
+                  },
+                  "Property": "Operating Income Latest Quarter"
+                }
+              },
+              "queryRef": "MART_COMPANY_COMPARISON.Operating Income Latest Quarter",
+              "nativeQueryRef": "Operating Income Latest Quarter",
+              "format": "\"₹\" #,0.00;\"₹\" -#,0.00;\"₹\" #,0.00"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_COMPANY_COMPARISON"
+                  }
+                },
+                "Property": "Operating Income Latest Quarter"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

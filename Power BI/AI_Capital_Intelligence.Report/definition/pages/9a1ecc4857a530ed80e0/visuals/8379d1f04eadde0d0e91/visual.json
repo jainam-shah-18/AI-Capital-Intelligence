@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "8379d1f04eadde0d0e91",
+  "position": {
+    "x": 916,
+    "y": 256,
+    "z": 68000,
+    "height": 168,
+    "width": 336,
+    "tabOrder": 68000
+  },
+  "visual": {
+    "visualType": "waterfallChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_COMPARISON"
+                    }
+                  },
+                  "Property": "COMPANY_NAME"
+                }
+              },
+              "queryRef": "MART_COMPANY_COMPARISON.COMPANY_NAME",
+              "nativeQueryRef": "COMPANY_NAME",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_COMPARISON"
+                    }
+                  },
+                  "Property": "Net Income Latest Quarter"
+                }
+              },
+              "queryRef": "MART_COMPANY_COMPARISON.Net Income Latest Quarter",
+              "nativeQueryRef": "Net Income Latest Quarter"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_COMPANY_COMPARISON"
+                  }
+                },
+                "Property": "Net Income Latest Quarter"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

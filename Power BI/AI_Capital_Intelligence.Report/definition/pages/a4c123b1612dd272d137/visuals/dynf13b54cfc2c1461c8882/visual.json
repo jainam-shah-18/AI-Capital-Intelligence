@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "dynf13b54cfc2c1461c8882",
+  "position": {
+    "x": 997.60196988224266,
+    "y": 120.75512152632373,
+    "z": 53000,
+    "height": 65.8664299234493,
+    "width": 257.97685053350978,
+    "tabOrder": 53000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+                    }
+                  },
+                  "Property": "Total Risk Indicators"
+                }
+              },
+              "queryRef": "MART_FINANCIAL_RISK_INDICATORS.Total Risk Indicators",
+              "nativeQueryRef": "Total Risk Indicators",
+              "format": "0"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MART_FINANCIAL_RISK_INDICATORS.Total Risk Indicators"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e3048a09ccbee21f41f1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MART_FINANCIAL_RISK_INDICATORS"
+              }
+            },
+            "Property": "Total Risk Indicators"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

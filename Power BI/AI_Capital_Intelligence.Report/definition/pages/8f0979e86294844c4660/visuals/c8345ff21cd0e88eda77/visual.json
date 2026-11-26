@@ -1,0 +1,288 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "c8345ff21cd0e88eda77",
+  "position": {
+    "x": 500,
+    "y": 482,
+    "z": 60000,
+    "height": 218,
+    "width": 494,
+    "tabOrder": 60000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "COMPANY_NAME"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.COMPANY_NAME",
+              "nativeQueryRef": "COMPANY_NAME",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_COMPANY_PERFORMANCE"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Year"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "PERIOD_END Year",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_COMPANY_PERFORMANCE"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Quarter"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Quarter",
+              "nativeQueryRef": "PERIOD_END Quarter",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_COMPANY_PERFORMANCE"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Month"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "PERIOD_END Month",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "MART_COMPANY_PERFORMANCE"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "PERIOD_END"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Day"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Day",
+              "nativeQueryRef": "PERIOD_END Day",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Total Revenue"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Operating Income"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Operating Income",
+              "nativeQueryRef": "Operating Income"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Net Income"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Net Income",
+              "nativeQueryRef": "Net Income"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Net Income Margin %"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Net Income Margin %",
+              "nativeQueryRef": "Net Income Margin %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "Operating Margin"
+                }
+              },
+              "queryRef": "MART_COMPANY_PERFORMANCE.Operating Margin",
+              "nativeQueryRef": "Operating Margin"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MART_COMPANY_PERFORMANCE"
+                  }
+                },
+                "Property": "Operating Income"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "MART_COMPANY_PERFORMANCE.COMPANY_NAME"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MART_COMPANY_PERFORMANCE"
+                    }
+                  },
+                  "Property": "COMPANY_NAME"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Year"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Quarter"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Month"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "MART_COMPANY_PERFORMANCE.PERIOD_END.Variation.Date Hierarchy.Day"
+            ],
+            "isCollapsed": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "drillFilterOtherVisuals": true
+  }
+}

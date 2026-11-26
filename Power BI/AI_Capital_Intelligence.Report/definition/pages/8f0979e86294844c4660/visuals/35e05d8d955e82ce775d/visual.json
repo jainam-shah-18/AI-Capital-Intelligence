@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "35e05d8d955e82ce775d",
+  "position": {
+    "x": 1022,
+    "y": 482,
+    "z": 66000,
+    "height": 218,
+    "width": 230,
+    "tabOrder": 66000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Revenue Growth: Achieved 20.64% revenue CAGR, demonstrating sustained revenue growth across the selected reporting history.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. Operating Efficiency: Delivered a 26.22% operating margin, measuring operating income relative to revenue.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. Net Profitability: Recorded a 19.77% net income margin, reflecting net income generated per unit of revenue.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "4. Quarterly Revenue: Reported 124.37bn revenue per quarter, providing a view of quarterly revenue scale across the selected companies.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
