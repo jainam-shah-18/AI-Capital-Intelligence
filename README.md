@@ -47,8 +47,7 @@ The latest pipeline execution extracted and loaded 4,529 observations across the
 Capabilities include canonical metric selection, filing evidence validation, quarterly period alignment, cash-flow derivation, company comparison, revenue forecasting, anomaly detection, and financial risk indicators.
 
 Latest validation:
-- 18/18 models built successfully
-- 61/61 data tests passed
+- Latest dbt build: 94 PASS, 0 WARN, 0 ERROR, 0 SKIP (94 total build steps)
 
 ## Cash Flow Accounting
 
