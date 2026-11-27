@@ -1,132 +1,120 @@
+
 relationship d7b308ba-84f6-4cce-b4c3-9b0982286575
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_COMPANY_COMPARISON.PERIOD_START
-	toColumn: LocalDateTable_cfa1a14d-e9f0-496d-ae39-dc2d5ac11bbd.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_COMPANY_COMPARISON.PERIOD_START
+    toColumn: LocalDateTable_cfa1a14d-e9f0-496d-ae39-dc2d5ac11bbd.Date
 
 relationship 00ed236f-745f-4e25-aaa9-bfe53ca53086
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_COMPANY_COMPARISON.PERIOD_END
-	toColumn: LocalDateTable_0a71c876-ba87-429f-952f-fad77a62efc7.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_COMPANY_COMPARISON.PERIOD_END
+    toColumn: LocalDateTable_0a71c876-ba87-429f-952f-fad77a62efc7.Date
 
 relationship 1b828429-260b-4673-b914-5032f234ce0e
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_COMPANY_COMPARISON.MART_CREATED_AT
-	toColumn: LocalDateTable_1b48b32a-bd8e-4aaa-9118-5dc6bbfe441c.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_COMPANY_COMPARISON.MART_CREATED_AT
+    toColumn: LocalDateTable_1b48b32a-bd8e-4aaa-9118-5dc6bbfe441c.Date
 
 relationship 563e3605-51d5-4c7e-9728-17aca74d5656
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_COMPANY_PERFORMANCE.PERIOD_START
-	toColumn: LocalDateTable_781abb73-3bca-4e49-b043-561c89fe1147.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_COMPANY_PERFORMANCE.PERIOD_START
+    toColumn: LocalDateTable_781abb73-3bca-4e49-b043-561c89fe1147.Date
 
 relationship 00329325-922c-4e45-b52b-349bc48ebd91
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_COMPANY_PERFORMANCE.PERIOD_END
-	toColumn: LocalDateTable_3eb64694-db2e-48cd-a034-44eb4bf6dab6.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_COMPANY_PERFORMANCE.PERIOD_END
+    toColumn: LocalDateTable_3eb64694-db2e-48cd-a034-44eb4bf6dab6.Date
 
 relationship 7eb9a2c9-edfd-4259-9f4f-2b0911abbab5
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_COMPANY_PERFORMANCE.MART_CREATED_AT
-	toColumn: LocalDateTable_0569c855-d38f-4178-99ac-3f106fa07bc0.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_COMPANY_PERFORMANCE.MART_CREATED_AT
+    toColumn: LocalDateTable_0569c855-d38f-4178-99ac-3f106fa07bc0.Date
 
 relationship 29ee69b4-f4f1-4c74-be86-b2415c963917
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_REVENUE_FORECAST.TARGET_PERIOD_START
-	toColumn: LocalDateTable_a7622121-d230-46ac-812f-e7f82090c632.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_REVENUE_FORECAST.TARGET_PERIOD_START
+    toColumn: LocalDateTable_a7622121-d230-46ac-812f-e7f82090c632.Date
 
 relationship 4612f740-ec49-4033-b4db-7f5a390c9753
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_REVENUE_FORECAST.TARGET_PERIOD_END
-	toColumn: LocalDateTable_89e5546d-3c2c-4428-beed-5114e1548ab3.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_REVENUE_FORECAST.TARGET_PERIOD_END
+    toColumn: LocalDateTable_89e5546d-3c2c-4428-beed-5114e1548ab3.Date
 
 relationship 8e7e4d1d-b0be-4e47-88dc-7cd19b0b5ac5
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_REVENUE_FORECAST.ACTUAL_PERIOD_END
-	toColumn: LocalDateTable_15fe418a-e567-44a0-add0-3ed75a6af7c0.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_REVENUE_FORECAST.ACTUAL_PERIOD_END
+    toColumn: LocalDateTable_15fe418a-e567-44a0-add0-3ed75a6af7c0.Date
 
 relationship 46e5fc6a-7fd6-43ad-bf02-6ab7c409dc14
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_REVENUE_FORECAST.FORECAST_SOURCE_PERIOD_END
-	toColumn: LocalDateTable_55154e12-8a97-401e-9771-f8af75a3f146.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_REVENUE_FORECAST.FORECAST_SOURCE_PERIOD_END
+    toColumn: LocalDateTable_55154e12-8a97-401e-9771-f8af75a3f146.Date
 
 relationship 1ec09efb-b5b5-4898-9c96-b2ef5a11812e
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_REVENUE_FORECAST.MODEL_CREATED_AT
-	toColumn: LocalDateTable_41e4190b-76e7-49a5-86ba-89ca253e6402.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_REVENUE_FORECAST.MODEL_CREATED_AT
+    toColumn: LocalDateTable_41e4190b-76e7-49a5-86ba-89ca253e6402.Date
 
 relationship 4746ff2a-d300-4966-ba47-32125c020515
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_CASH_FLOW_ANALYSIS.PERIOD_START
-	toColumn: LocalDateTable_69150415-066d-488e-8e5a-0380c0d921c6.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_CASH_FLOW_ANALYSIS.PERIOD_START
+    toColumn: LocalDateTable_69150415-066d-488e-8e5a-0380c0d921c6.Date
 
 relationship 9bf26f55-c3d5-4f90-b26f-4e6352399fca
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_CASH_FLOW_ANALYSIS.PERIOD_END
-	toColumn: LocalDateTable_afa5f047-8d1e-4847-8e33-99cc4e8d8390.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_CASH_FLOW_ANALYSIS.PERIOD_END
+    toColumn: LocalDateTable_afa5f047-8d1e-4847-8e33-99cc4e8d8390.Date
 
 relationship 8d5c5fa6-4978-479e-b9e2-93150db2f127
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_CASH_FLOW_ANALYSIS.MODEL_CREATED_AT
-	toColumn: LocalDateTable_31b74fcf-a007-40d2-8315-5c23ef7cc09d.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_CASH_FLOW_ANALYSIS.MODEL_CREATED_AT
+    toColumn: LocalDateTable_31b74fcf-a007-40d2-8315-5c23ef7cc09d.Date
 
 relationship 9f0cec90-492b-401a-84fd-ce453d8b526e
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_FINANCIAL_ANOMALIES.PERIOD_START
-	toColumn: LocalDateTable_dccc5701-24bf-473f-8fe9-28dc855fa991.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_FINANCIAL_ANOMALIES.PERIOD_START
+    toColumn: LocalDateTable_dccc5701-24bf-473f-8fe9-28dc855fa991.Date
 
 relationship c25fca48-8fa4-485f-93a7-1e666c75abb1
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_FINANCIAL_ANOMALIES.PERIOD_END
-	toColumn: LocalDateTable_e082657d-0e65-47d1-bf36-57c1fa863f92.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_FINANCIAL_ANOMALIES.PERIOD_END
+    toColumn: LocalDateTable_e082657d-0e65-47d1-bf36-57c1fa863f92.Date
 
 relationship bcec08cd-7ee5-40ae-ac33-04aa74e9bee9
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_FINANCIAL_ANOMALIES.PRIOR_YEAR_PERIOD_END
-	toColumn: LocalDateTable_5f62ae4e-8eef-4a7a-b584-637c873f3ae6.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_FINANCIAL_ANOMALIES.PRIOR_YEAR_PERIOD_END
+    toColumn: LocalDateTable_5f62ae4e-8eef-4a7a-b584-637c873f3ae6.Date
 
 relationship 15e657a8-a377-47e5-829a-104461c94647
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_FINANCIAL_ANOMALIES.MODEL_CREATED_AT
-	toColumn: LocalDateTable_42a27f90-9b9d-4a36-be76-050486a75e3a.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_FINANCIAL_ANOMALIES.MODEL_CREATED_AT
+    toColumn: LocalDateTable_42a27f90-9b9d-4a36-be76-050486a75e3a.Date
 
 relationship bcd206e8-b8ab-421d-a917-57b47db1987c
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_FINANCIAL_RISK_INDICATORS.PERIOD_START
-	toColumn: LocalDateTable_59ba268e-57fc-4111-bcae-6534b2fadba8.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_FINANCIAL_RISK_INDICATORS.PERIOD_START
+    toColumn: LocalDateTable_59ba268e-57fc-4111-bcae-6534b2fadba8.Date
 
 relationship 4ca853e4-c947-4f1b-af38-8c0f1308a294
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_FINANCIAL_RISK_INDICATORS.PERIOD_END
-	toColumn: LocalDateTable_2572616d-9492-4727-8a89-7feb3b0040b8.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_FINANCIAL_RISK_INDICATORS.PERIOD_END
+    toColumn: LocalDateTable_2572616d-9492-4727-8a89-7feb3b0040b8.Date
 
 relationship 2c9c5894-1a4d-4b6f-a91c-f026d91a9613
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_FINANCIAL_RISK_INDICATORS.MODEL_CREATED_AT
-	toColumn: LocalDateTable_ab172c46-ee5e-401e-8343-08448ab0c4e9.Date
-
-relationship AutoDetected_a23f3a0c-935a-4999-ba49-5d50d496b703
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: MART_COMPANY_COMPARISON.REVENUE
-	toColumn: MART_COMPANY_PERFORMANCE.REVENUE
-
-relationship AutoDetected_1c37105c-fdf4-43b4-b676-e098d1f5123c
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: MART_FINANCIAL_RISK_INDICATORS.REVENUE
-	toColumn: MART_COMPANY_PERFORMANCE.REVENUE
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_FINANCIAL_RISK_INDICATORS.MODEL_CREATED_AT
+    toColumn: LocalDateTable_ab172c46-ee5e-401e-8343-08448ab0c4e9.Date
 
 relationship e41f248e-fd8d-48a1-bd27-632329bb6dcd
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_PIPELINE_RUN_MONITORING.STARTED_AT
-	toColumn: LocalDateTable_d818b436-82bf-4952-ac04-5d981ac0fe05.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_PIPELINE_RUN_MONITORING.STARTED_AT
+    toColumn: LocalDateTable_d818b436-82bf-4952-ac04-5d981ac0fe05.Date
 
 relationship f397b398-052e-4aa7-802a-2f92acb2b047
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_PIPELINE_RUN_MONITORING.FINISHED_AT
-	toColumn: LocalDateTable_8a28e839-c4f4-4f21-ba3c-0778d3885b02.Date
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_PIPELINE_RUN_MONITORING.FINISHED_AT
+    toColumn: LocalDateTable_8a28e839-c4f4-4f21-ba3c-0778d3885b02.Date
 
 relationship 795e988e-b730-47a2-aca3-d0c08cb4eaa5
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MART_PIPELINE_RUN_MONITORING.CREATED_AT
-	toColumn: LocalDateTable_14e77bd6-1288-4333-b37b-18ff0bd6373d.Date
-
+    joinOnDateBehavior: datePartOnly
+    fromColumn: MART_PIPELINE_RUN_MONITORING.CREATED_AT
+    toColumn: LocalDateTable_14e77bd6-1288-4333-b37b-18ff0bd6373d.Date

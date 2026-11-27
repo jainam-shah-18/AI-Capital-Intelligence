@@ -76,3 +76,6 @@ AI_Capital_Intelligence_before_fixes.pbix
 
 # Power BI working backup
 Power BI/AI_Capital_Intelligence_WORKING_BACKUP.pbix
+
+# Local Power BI semantic model backup
+Power BI/AI_Capital_Intelligence.SemanticModel_BACKUP/
