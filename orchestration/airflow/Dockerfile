@@ -12,3 +12,11 @@ RUN pip install --no-cache-dir \
     "boto3>=1.35,<2"
 
 WORKDIR /opt/airflow
+
+# Install dbt separately to avoid conflicts with Airflow dependencies
+RUN python -m venv /home/airflow/dbt-venv && \
+    /home/airflow/dbt-venv/bin/pip install --no-cache-dir \
+    "dbt-core==1.11.14" \
+    "dbt-snowflake==1.11.6"
+
+ENV PATH="/home/airflow/dbt-venv/bin:${PATH}"

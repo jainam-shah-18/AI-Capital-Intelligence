@@ -12,6 +12,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET}
     AIRFLOW__API_AUTH__JWT_ISSUER: aci-airflow
     PYTHONPATH: /opt/airflow/aci
+    DBT_PROFILES_DIR: /opt/airflow/config/dbt
     SEC_USER_AGENT: ${SEC_USER_AGENT:?SEC_USER_AGENT missing from root .env}
     SEC_REQUEST_DELAY_SECONDS: ${SEC_REQUEST_DELAY_SECONDS:-0.12}
     AWS_REGION: ${AWS_REGION:-ap-south-1}
@@ -27,6 +28,7 @@ x-airflow-common: &airflow-common
     SNOWFLAKE_ROLE: ${SNOWFLAKE_ROLE}
   volumes:
     - ../../src:/opt/airflow/aci/src:ro
+    - ../../dbt:/opt/airflow/aci/dbt:ro
     - ../../data:/opt/airflow/aci/data
     - ./dags:/opt/airflow/dags:ro
     - ./logs:/opt/airflow/logs
@@ -74,7 +76,7 @@ services:
     <<: *airflow-common
     command: api-server
     ports:
-      - "8081:8080"
+      - "8181:8080"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/monitor/health"]
       interval: 30s
