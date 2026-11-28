@@ -35,6 +35,7 @@ EXPECTED_METRICS = {
     start_date=pendulum.datetime(2026, 11, 7, tz="Asia/Kolkata"),
     catchup=False,
     max_active_runs=1,
+    dagrun_timeout=timedelta(minutes=70),
     default_args={
         "owner": "aci",
         "retries": 2,
@@ -44,7 +45,7 @@ EXPECTED_METRICS = {
 )
 def aci_sec_financial_pipeline():
 
-    @task
+    @task(execution_timeout=timedelta(minutes=30))
     def run_sec_pipeline():
         import sys
 
@@ -61,7 +62,7 @@ def aci_sec_financial_pipeline():
 
         return airflow_run_id
 
-    @task
+    @task(execution_timeout=timedelta(minutes=5))
     def validate_pipeline_outputs():
         csv_path = DATA_DIR / "financial_metrics.csv"
         parquet_path = DATA_DIR / "financial_metrics.parquet"
@@ -95,7 +96,9 @@ def aci_sec_financial_pipeline():
 
         logger.info(
             "Output validation passed: %s rows, %s companies, %s metrics",
-            len(csv_df), len(actual_tickers), len(actual_metrics),
+            len(csv_df),
+            len(actual_tickers),
+            len(actual_metrics),
         )
 
         return {
@@ -104,7 +107,7 @@ def aci_sec_financial_pipeline():
             "metrics": len(actual_metrics),
         }
 
-    @task
+    @task(execution_timeout=timedelta(minutes=30))
     def run_dbt_build():
         if not DBT_PROJECT.is_dir():
             raise FileNotFoundError(f"dbt project missing: {DBT_PROJECT}")
@@ -165,7 +168,10 @@ def aci_sec_financial_pipeline():
                 logger.info("dbt stderr:\n%s", result.stderr)
 
             if result.returncode != 0:
-                logger.error("dbt build failed with exit code %s", result.returncode)
+                logger.error(
+                    "dbt build failed with exit code %s",
+                    result.returncode,
+                )
                 raise RuntimeError(
                     f"dbt build failed. Review task logs and {log_dir}"
                 )

@@ -1,0 +1,20 @@
+﻿flowchart TD
+    START([Scheduled or Manual DAG Run])
+    A["Task 1: run_sec_pipeline"]
+    B["Extract SEC Company Facts"]
+    C["Transform and Normalize Data"]
+    D["Write CSV and Parquet Outputs"]
+    E["Task 2: validate_pipeline_outputs"]
+    F{"Outputs valid?"}
+    G["Task 3: run_dbt_build"]
+    H["Run dbt Seeds, Models and Tests"]
+    I{"dbt build successful?"}
+    SUCCESS([Pipeline Run Successful])
+    FAIL([Task Failed / Airflow Retry])
+
+    START --> A --> B --> C --> D --> E --> F
+    F -->|Yes| G
+    F -->|No| FAIL
+    G --> H --> I
+    I -->|Yes| SUCCESS
+    I -->|No| FAIL

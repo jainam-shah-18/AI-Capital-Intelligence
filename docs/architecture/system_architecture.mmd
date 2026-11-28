@@ -1,0 +1,46 @@
+flowchart TB
+    SEC["SEC EDGAR Company Facts API"]
+
+    subgraph ORCHESTRATION["ORCHESTRATION"]
+        AF["Apache Airflow"]
+        T1["1. SEC Pipeline"]
+        T2["2. Output Validation"]
+        T3["3. dbt Build"]
+        AF --> T1 --> T2 --> T3
+    end
+
+    subgraph INGESTION["PYTHON DATA PIPELINE"]
+        PY["Extract and Normalize"]
+        FILES["Local CSV and Parquet"]
+        PY --> FILES
+    end
+
+    subgraph STORAGE["DATA DELIVERY"]
+        S3["AWS S3<br/>Boto3 Upload"]
+        SF["Snowflake<br/>FINANCIAL_METRICS"]
+    end
+
+    subgraph TRANSFORMATION["DBT ANALYTICS ENGINEERING"]
+        STG["2 Staging Models"]
+        INT["9 Intermediate Models"]
+        MART["9 Analytical Marts"]
+        STG --> INT --> MART
+    end
+
+    subgraph CONSUMPTION["CONSUMPTION"]
+        BI["Power BI<br/>7 Report Pages"]
+        AI["AI Assistant<br/>Snowflake + ChromaDB + Ollama"]
+        MON["Pipeline Monitoring"]
+    end
+
+    SEC --> PY
+    FILES --> S3
+    PY -->|"Direct Snowflake load via write_pandas"| SF
+    SF --> STG
+    MART --> BI
+    MART --> AI
+    MART --> MON
+
+    T1 -. "Executes" .-> PY
+    T2 -. "Validates" .-> FILES
+    T3 -. "Executes" .-> STG
